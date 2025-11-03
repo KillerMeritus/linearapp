@@ -1,8 +1,14 @@
+'use client';
+
 import React from 'react';
 import { AppSidebar } from '@/components/layout/sidebar/app-sidebar';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { CreateIssueModalProvider } from '@/components/common/issues/create-issue-modal-provider';
 import { CommandPalette } from '@/components/common/command-palette';
+import { ErrorBoundary } from '@/components/common/error-boundary';
+import { ThemeInitializer } from '@/components/common/theme-initializer';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { cn } from '@/lib/utils';
 
 interface MainLayoutProps {
@@ -33,23 +39,30 @@ export default function MainLayout({ children, header, headersNumber = 2 }: Main
       2: 'h-[calc(100svh-80px)] lg:h-[calc(100svh-96px)]',
    };
    return (
-      <SidebarProvider>
-         <CreateIssueModalProvider />
-         <CommandPalette />
-         <AppSidebar />
-         <div className="h-svh overflow-hidden w-full">
-            <div className="overflow-hidden flex flex-col items-center justify-start bg-container h-full w-full">
-               {header}
-               <div
-                  className={cn(
-                     'overflow-auto w-full',
-                     isEmptyHeader(header) ? 'h-full' : height[headersNumber as keyof typeof height]
-                  )}
-               >
-                  {children}
+      <ErrorBoundary>
+         <ThemeInitializer />
+         <SidebarProvider>
+            <CreateIssueModalProvider />
+            <CommandPalette />
+            <AppSidebar />
+            <DndProvider backend={HTML5Backend}>
+               <div className="h-svh overflow-hidden w-full">
+                  <div className="overflow-hidden flex flex-col items-center justify-start bg-container h-full w-full">
+                     {header}
+                     <div
+                        className={cn(
+                           'overflow-auto w-full',
+                           isEmptyHeader(header)
+                              ? 'h-full'
+                              : height[headersNumber as keyof typeof height]
+                        )}
+                     >
+                        {children}
+                     </div>
+                  </div>
                </div>
-            </div>
-         </div>
-      </SidebarProvider>
+            </DndProvider>
+         </SidebarProvider>
+      </ErrorBoundary>
    );
 }

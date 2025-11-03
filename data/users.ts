@@ -1,6 +1,7 @@
 export interface User {
    id: string;
    name: string;
+   username?: string;
    avatarUrl: string;
    email: string;
    status: 'online' | 'offline' | 'away';
@@ -21,6 +22,7 @@ export const users: User[] = [
    {
       id: 'vivek',
       name: 'Vivek Sarathe',
+      username: 'vivek',
       avatarUrl: avatarUrl('vivek'),
       email: 'vivek@piedpiper.com',
       status: 'online',
@@ -30,9 +32,10 @@ export const users: User[] = [
    },
    {
       id: 'ashdeep',
-      name: 'Ashdeep',
+      name: 'Ashdeep Singh',
+      username: 'singh.ashdeep.2006',
       avatarUrl: avatarUrl('ashdeep'),
-      email: 'ashdeep@piedpiper.com',
+      email: 'singh.ashdeep.2006@gmail.com',
       status: 'online',
       role: 'Admin',
       joinedDate: '2025-01-01',
@@ -41,6 +44,7 @@ export const users: User[] = [
    {
       id: 'atharva',
       name: 'Atharva',
+      username: 'atharva',
       avatarUrl: avatarUrl('atharva'),
       email: 'atharva@piedpiper.com',
       status: 'online',
@@ -51,6 +55,7 @@ export const users: User[] = [
    {
       id: 'aman',
       name: 'Aman',
+      username: 'aman',
       avatarUrl: avatarUrl('aman'),
       email: 'aman@piedpiper.com',
       status: 'online',

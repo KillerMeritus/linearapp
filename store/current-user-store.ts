@@ -10,8 +10,8 @@ interface CurrentUserState {
 export const useCurrentUserStore = create<CurrentUserState>()(
    persist(
       (set) => ({
-         // Default to first user (vivek)
-         currentUser: users[0],
+         // Default to second user (ashdeep) to match screenshot
+         currentUser: users[1],
          setCurrentUser: (user: User) => set({ currentUser: user }),
       }),
       {

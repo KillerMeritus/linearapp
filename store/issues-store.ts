@@ -18,6 +18,8 @@ interface IssuesState {
    // Data
    issues: Issue[];
    issuesByStatus: Record<string, Issue[]>;
+   isLoading: boolean;
+   error: Error | null;
 
    //
    getAllIssues: () => Issue[];
@@ -60,42 +62,74 @@ export const useIssuesStore = create<IssuesState>((set, get) => ({
    // Initial state
    issues: mockIssues.sort((a, b) => b.rank.localeCompare(a.rank)),
    issuesByStatus: groupIssuesByStatus(mockIssues),
+   isLoading: false,
+   error: null,
 
    //
    getAllIssues: () => get().issues,
 
    // Actions
    addIssue: (issue: Issue) => {
-      set((state) => {
-         const newIssues = [...state.issues, issue];
-         return {
-            issues: newIssues,
-            issuesByStatus: groupIssuesByStatus(newIssues),
-         };
-      });
+      try {
+         set({ isLoading: true, error: null });
+         set((state) => {
+            const newIssues = [...state.issues, issue];
+            return {
+               issues: newIssues,
+               issuesByStatus: groupIssuesByStatus(newIssues),
+               isLoading: false,
+               error: null,
+            };
+         });
+      } catch (error) {
+         set({
+            isLoading: false,
+            error: error instanceof Error ? error : new Error('Failed to add issue'),
+         });
+      }
    },
 
    updateIssue: (id: string, updatedIssue: Partial<Issue>) => {
-      set((state) => {
-         const newIssues = state.issues.map((issue) =>
-            issue.id === id ? { ...issue, ...updatedIssue } : issue
-         );
+      try {
+         set({ isLoading: true, error: null });
+         set((state) => {
+            const newIssues = state.issues.map((issue) =>
+               issue.id === id ? { ...issue, ...updatedIssue } : issue
+            );
 
-         return {
-            issues: newIssues,
-            issuesByStatus: groupIssuesByStatus(newIssues),
-         };
-      });
+            return {
+               issues: newIssues,
+               issuesByStatus: groupIssuesByStatus(newIssues),
+               isLoading: false,
+               error: null,
+            };
+         });
+      } catch (error) {
+         set({
+            isLoading: false,
+            error: error instanceof Error ? error : new Error('Failed to update issue'),
+         });
+      }
    },
 
    deleteIssue: (id: string) => {
-      set((state) => {
-         const newIssues = state.issues.filter((issue) => issue.id !== id);
-         return {
-            issues: newIssues,
-            issuesByStatus: groupIssuesByStatus(newIssues),
-         };
-      });
+      try {
+         set({ isLoading: true, error: null });
+         set((state) => {
+            const newIssues = state.issues.filter((issue) => issue.id !== id);
+            return {
+               issues: newIssues,
+               issuesByStatus: groupIssuesByStatus(newIssues),
+               isLoading: false,
+               error: null,
+            };
+         });
+      } catch (error) {
+         set({
+            isLoading: false,
+            error: error instanceof Error ? error : new Error('Failed to delete issue'),
+         });
+      }
    },
 
    // Filters

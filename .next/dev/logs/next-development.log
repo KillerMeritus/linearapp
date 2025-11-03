@@ -1,0 +1,3 @@
+[00:00:03.670] Server  LOG      ✓ Ready in 3.4s
+[00:00:07.564] Server  ERROR   (node:96123) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)

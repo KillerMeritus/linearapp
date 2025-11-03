@@ -110,6 +110,107 @@ export const accountItems = [
    },
 ];
 
+export const workspaceSettingsItems = [
+   {
+      name: 'Overview',
+      url: '/piedpiper/settings',
+      icon: BarChart3,
+   },
+   {
+      name: 'General',
+      url: '/piedpiper/settings/general',
+      icon: Settings,
+   },
+   {
+      name: 'Security',
+      url: '/piedpiper/settings/security',
+      icon: KeyRound,
+   },
+   {
+      name: 'Members',
+      url: '/piedpiper/settings/members',
+      icon: Users,
+   },
+   {
+      name: 'Labels',
+      url: '/piedpiper/settings/labels',
+      icon: Tag,
+   },
+   {
+      name: 'Templates',
+      url: '/piedpiper/settings/templates',
+      icon: FileText,
+   },
+   {
+      name: 'Roadmaps',
+      url: '/piedpiper/settings/roadmaps',
+      icon: Target,
+   },
+   {
+      name: 'SLAs',
+      url: '/piedpiper/settings/slas',
+      icon: Clock,
+   },
+   {
+      name: 'Project Updates',
+      url: '/piedpiper/settings/project-updates',
+      icon: Sparkles,
+   },
+   {
+      name: 'Emojis',
+      url: '/piedpiper/settings/emojis',
+      icon: MessageSquare,
+   },
+   {
+      name: 'Plans',
+      url: '/piedpiper/settings/plans',
+      icon: Archive,
+   },
+   {
+      name: 'Billing',
+      url: '/piedpiper/settings/billing',
+      icon: Archive,
+   },
+   {
+      name: 'Import / Export',
+      url: '/piedpiper/settings/import-export',
+      icon: Archive,
+   },
+   {
+      name: 'Integrations',
+      url: '/piedpiper/settings/integrations',
+      icon: Zap,
+   },
+];
+
+export const accountSettingsItems = [
+   {
+      name: 'Profile',
+      url: '/piedpiper/settings/profile',
+      icon: UserRound,
+   },
+   {
+      name: 'Preferences',
+      url: '/piedpiper/settings/preferences',
+      icon: Settings,
+   },
+   {
+      name: 'Linked Accounts',
+      url: '/piedpiper/settings/linked-accounts',
+      icon: Users,
+   },
+   {
+      name: 'Notifications',
+      url: '/piedpiper/settings/notifications',
+      icon: Bell,
+   },
+   {
+      name: 'Applications, API',
+      url: '/piedpiper/settings/api',
+      icon: KeyRound,
+   },
+];
+
 export const featuresItems = [
    {
       name: 'Labels',

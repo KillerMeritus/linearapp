@@ -6,8 +6,6 @@ import { useSearchStore } from '@/store/search-store';
 import { useViewStore } from '@/store/view-store';
 import { useFilterStore } from '@/store/filter-store';
 import { FC, useMemo } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { GroupIssues } from './group-issues';
 import { SearchIssues } from './search-issues';
 import { CustomDragLayer } from './issue-grid';
@@ -67,7 +65,7 @@ const FilteredIssuesView: FC<{
    }, [filteredIssues]);
 
    return (
-      <DndProvider backend={HTML5Backend}>
+      <>
          <CustomDragLayer />
          <div className={cn(isViewTypeGrid && 'flex h-full gap-3 px-2 py-2 min-w-max')}>
             {status.map((statusItem) => (
@@ -79,7 +77,7 @@ const FilteredIssuesView: FC<{
                />
             ))}
          </div>
-      </DndProvider>
+      </>
    );
 };
 
@@ -88,7 +86,7 @@ const GroupIssuesListView: FC<{
 }> = ({ isViewTypeGrid = false }) => {
    const { issuesByStatus } = useIssuesStore();
    return (
-      <DndProvider backend={HTML5Backend}>
+      <>
          <CustomDragLayer />
          <div className={cn(isViewTypeGrid && 'flex h-full gap-3 px-2 py-2 min-w-max')}>
             {status.map((statusItem) => (
@@ -100,6 +98,6 @@ const GroupIssuesListView: FC<{
                />
             ))}
          </div>
-      </DndProvider>
+      </>
    );
 };

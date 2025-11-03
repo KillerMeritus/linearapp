@@ -1,0 +1,7 @@
+{
+  "/[orgId]/settings/page": "app/[orgId]/settings/page.js",
+  "/[orgId]/settings/preferences/page": "app/[orgId]/settings/preferences/page.js",
+  "/[orgId]/settings/profile/page": "app/[orgId]/settings/profile/page.js",
+  "/[orgId]/team/[teamId]/all/page": "app/[orgId]/team/[teamId]/all/page.js",
+  "/page": "app/page.js"
+}

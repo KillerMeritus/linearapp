@@ -1,4 +1,4 @@
-# 🚀 LinearApp: A Resilient Task Management UI
+# 🚀 LinearApp: A Modern Task Management UI
 
 <br>
 
@@ -6,7 +6,7 @@
 <p align="center">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-98%25-blue?style=for-the-badge&logo=typescript">
   <img alt="pnpm" src="https://img.shields.io/badge/pnpm-OK-orange?style=for-the-badge&logo=pnpm">
-  <img alt="Vite" src="https://img.shields.io/badge/Vite-Fast-purple?style=for-the-badge&logo=vite">
+  <img alt="Next.js" src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js">
   <img alt="License" src="https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge">
 </p>
 
@@ -15,13 +15,13 @@
 ---
 
 <p align="center">
-  <strong>A modern task-tracking UI showcasing robust client-side architecture with instant interactions, offline-first design, and intelligent conflict resolution.</strong>
+  <strong>A modern task management application built with Next.js 15, React 19, and TypeScript, featuring a Linear-inspired UI with drag-and-drop, filtering, and real-time updates.</strong>
 </p>
 
 <br>
 
 <p align="center">
-  <strong><a href="#">🔴 LIVE DEMO - Add Your URL Here</a></strong>
+  <strong><a href="https://scaler-hackathon.piedpiper.dev">🔴 LIVE DEMO</a></strong>
 </p>
 
 
@@ -35,25 +35,25 @@
 
 ## ✨ Key Features
 
-This isn't just a simple UI—it's a blueprint for building resilient, production-ready applications.
+A production-ready task management application with modern architecture and best practices.
 
-### ⚡️ Instant Interactions
-UI updates happen immediately on the client. Creating, editing, and reordering tasks feels instantaneous with no spinners or waiting.
+### ⚡️ Instant UI Updates
+UI updates happen immediately on the client using Zustand for state management. Creating, editing, and reordering issues feels instantaneous.
 
-### 🔄 Resilient Background Sync
-All changes are queued persistently. The app intelligently batches requests, retries on failure with exponential backoff, and syncs in the background.
+### 🎨 Beautiful UI Components
+Built with shadcn/ui and Tailwind CSS, featuring a Linear-inspired design with dark mode support, smooth animations, and responsive layouts.
 
-### 🌐 Offline-First
-Keep working without connectivity. The app is fully functional offline and automatically syncs all changes when you reconnect.
+### 🔍 Advanced Filtering & Search
+Powerful filtering system for status, assignee, priority, labels, and projects. Real-time search across issue titles and identifiers.
 
-### 🚫 Smart Conflict Handling
-When server data changes (e.g., another user edited the same task), the UI flags the conflict and provides a diff/merge view to resolve it.
+### 📊 Kanban Board View
+Drag-and-drop Kanban board with columns for different statuses. Smooth animations using LexoRank algorithm for ordering.
 
-### 🚄 Fluid UI & Animations
-All state changes are animated. Drag-and-drop reordering uses smooth transforms, and list updates use FLIP-style transitions.
+### 🛡️ Error Handling
+Comprehensive error boundaries and error handling throughout the application for better user experience and debugging.
 
 ### 🔒 TypeScript-First
-Strongly-typed codebase for safe refactoring with clearly defined domain models (Task, Op, QueueEntry).
+Strongly-typed codebase for safe refactoring with clearly defined domain models (Issue, Project, Team, User).
 
 <br>
 
@@ -87,20 +87,20 @@ pnpm install
 pnpm dev
 ```
 
-The app will be running at `http://localhost:5173` (or similar) with HMR.
+The app will be running at `http://localhost:3002` with hot module reloading (HMR).
 
 ### Build for Production
 
 ```bash
 pnpm build
-pnpm preview  # Serve the production build
+pnpm start  # Serve the production build
 ```
 
-### Run Tests & Lint
+### Run Lint & Format
 
 ```bash
-pnpm test
-pnpm lint
+pnpm lint    # Check for linting errors
+pnpm format   # Format code with Prettier
 ```
 
 > **Note:** If your app requires environment variables, copy `.env.example` to `.env` and fill in your API keys/endpoints before running.
@@ -115,27 +115,36 @@ pnpm lint
 
 ## 🛠️ Tech Stack & Architecture
 
-This project is intentionally minimal to focus on core logic and patterns.
+Modern, production-ready stack with best practices.
 
 | Technology | Purpose |
 |------------|---------|
-| **TypeScript** | Developer ergonomics and type safety |
-| **UI Framework** | Lightweight component-based UI (React/Vue/Svelte) with hooks/stores |
-| **Styling** | Plain CSS with performant transform and opacity transitions |
-| **Persistence** | IndexedDB for client-side queue and operation storage |
-| **Sync Engine** | Custom-built queue and dispatcher with batching, coalescing, retry logic, and conflict detection |
+| **Next.js 15** | React framework with App Router for routing and server components |
+| **React 19** | UI library with latest features and performance improvements |
+| **TypeScript** | Type safety and developer experience |
+| **Zustand** | Lightweight state management for client-side data |
+| **Tailwind CSS** | Utility-first CSS framework for styling |
+| **shadcn/ui** | High-quality component library built on Radix UI |
+| **React DnD** | Drag-and-drop functionality for Kanban board |
+| **LexoRank** | Algorithm for maintaining issue order |
 
-### High-Level Flow
+### Architecture Overview
 
-1. **User Action** — User creates a task
-2. **Optimistic UI** — Task immediately added to local store with temporary ID (`c_...`) and "pending" indicator
-3. **Queue** — `create` operation added to persistent IndexedDB queue
-4. **Sync Worker** — Worker picks up the operation
-5. **Batch & Send** — Operations batched and sent to server
-6. **Server Response:**
-   - **Success (200)** — Server returns canonical Task with real ID, worker updates store
-   - **Conflict (409)** — Server version is newer, worker marks as "conflicted", UI shows "Resolve" button
-   - **Failure (50x/Network)** — Worker re-queues operation and schedules retry with exponential backoff
+The application follows a clean architecture pattern:
+
+1. **UI Layer** (`components/`) - React components for presentation
+2. **State Layer** (`store/`) - Zustand stores for global state management
+3. **Service Layer** (`services/`) - Business logic and data transformations
+4. **Data Layer** (`data/`) - Type definitions and mock data
+5. **Utils** (`lib/`, `utils/`) - Utility functions and helpers
+
+### High-Level Data Flow
+
+1. **User Action** — User creates/updates an issue
+2. **State Update** — Zustand store immediately updates local state
+3. **UI Re-render** — React components re-render with new state
+4. **Optimistic Updates** — Changes appear instantly with loading states
+5. **Error Handling** — Errors are caught and displayed via error boundaries
 
 <br>
 
@@ -147,55 +156,38 @@ This project is intentionally minimal to focus on core logic and patterns.
 
 ## 🧠 How It Works: The Core Logic
 
-### 1. Optimistic Updates & The Sync Queue
+### 1. State Management with Zustand
 
-When a user makes a change, we assume it will succeed:
+The application uses Zustand for state management, providing a simple and efficient way to manage global state:
 
-#### Operations
-Every mutation (create, update, delete, move) becomes an Operation object saved to the queue.
+- **Issues Store** - Manages all issues, filtering, and CRUD operations
+- **Filter Store** - Handles active filters for status, assignee, priority, labels, and projects
+- **Search Store** - Manages search state and query
+- **View Store** - Controls view type (list/grid)
 
-#### Coalescing
-Multiple rapid edits to the same task are merged into a single update, saving bandwidth.
+All state updates are synchronous and immediate, providing instant feedback.
 
-#### Batching
-Sync worker flushes the queue periodically, bundling multiple operations into one HTTP request.
+### 2. Drag-and-Drop with React DnD
 
-#### Temp IDs
-New tasks get temporary IDs like `c_123xyz`. When the server confirms creation, the app atomically updates to the real ID (`server_456`) throughout the store and queue.
+The Kanban board uses React DnD for drag-and-drop functionality:
 
-### 2. Conflict & Version Handling
+- **LexoRank Algorithm** - Maintains issue order using lexicographic ranking
+- **Custom Drag Layer** - Provides visual feedback during dragging
+- **Status Updates** - Dropping an issue automatically updates its status
 
-The server is the ultimate source of truth. We use entity versions (`updatedAt` or version numbers) to detect conflicts.
+### 3. Error Handling & Loading States
 
-#### Example Scenario
+- **Error Boundaries** - Catch and display React errors gracefully
+- **Try-Catch Blocks** - Services include comprehensive error handling
+- **Loading States** - Visual feedback during async operations
+- **Error Messages** - User-friendly error messages throughout the app
 
-1. You load a task at version `v1`
-2. You go offline
-3. A colleague edits the same task → now `v2` on server
-4. You come back online and edit your `v1` version
+### 4. Performance Optimizations
 
-#### Resolution
-
-1. Your client sends update for `v1`
-2. Server rejects with `409 Conflict`, returns current `v2` data
-3. Client marks item as conflicted, stores both versions
-4. UI shows "Conflict" badge with modal offering: "Accept Server Version", "Keep My Version", or side-by-side merge view
-
-### 3. Performance & UI Polish
-
-The "instant" feel comes from prioritizing UI responsiveness:
-
-#### FLIP Animations
-Calculate old and new positions, use CSS transforms to animate smoothly.
-
-#### GPU-Accelerated
-All animations use `transform` and `opacity` to avoid layout thrashing.
-
-#### Virtualization
-For 1000+ items, windowing ensures only visible items are rendered.
-
-#### Debouncing
-Text field edits are debounced to queue sync operations only after user pauses typing.
+- **Memoization** - useMemo and useCallback for expensive computations
+- **Code Splitting** - Automatic route-based code splitting with Next.js
+- **Optimistic Updates** - Immediate UI updates before server confirmation
+- **Efficient Re-renders** - Zustand's selective subscriptions minimize re-renders
 
 <br>
 
@@ -205,68 +197,93 @@ Text field edits are debounced to queue sync operations only after user pauses t
 <br>
 
 
-## 🔬 Advanced Topics
+## 🔬 Project Structure
 
 <details>
-<summary><strong>Edge Cases We Handle</strong></summary>
+<summary><strong>Directory Layout</strong></summary>
 
-### Duplicate Ops
-Deduplication by `opId` and content hash.
-
-### Large Offline Queue
-UI notifies if queue is huge, offers manual "force flush" or "clear queue".
-
-### Partial Batch Commit
-If 2 of 5 ops fail, commit the 3 successful ones and re-queue the failures.
-
-### Clock Skew
-Prefer server-generated timestamps for all canonical data.
-
-### Concurrent Delete + Edit
-If you edit a task another user deleted, UI offers: "Restore task?" or "Discard edit".
-
-### Storage Pressure
-Detect low IndexedDB quota and warn user.
+```
+linearapp/
+├── app/                    # Next.js App Router pages
+│   ├── [orgId]/           # Organization-scoped routes
+│   │   ├── inbox/         # Notifications
+│   │   ├── issues/        # Issue management
+│   │   ├── projects/      # Project management
+│   │   └── teams/         # Team management
+│   └── layout.tsx         # Root layout
+│
+├── components/            # React components
+│   ├── ui/                # Base UI components (shadcn/ui)
+│   ├── layout/            # Layout components
+│   └── common/            # Feature-specific components
+│       ├── issues/        # Issue components
+│       ├── projects/      # Project components
+│       └── members/      # Member components
+│
+├── store/                 # Zustand stores
+│   ├── issues-store.ts    # Issue state management
+│   ├── filter-store.ts    # Filter state
+│   └── ...                # Other stores
+│
+├── services/              # Business logic
+│   ├── task-manager.service.ts
+│   └── project-coordinator.service.ts
+│
+├── data/                  # Type definitions & mock data
+│   ├── issues.ts
+│   ├── projects.ts
+│   └── ...
+│
+└── lib/                   # Utilities
+    └── utils.ts           # Helper functions
+```
 
 </details>
 
 <details>
-<summary><strong>Observability & Debugging</strong></summary>
+<summary><strong>Error Handling Strategy</strong></summary>
 
-### Debug Mode
-Enable verbose logging with `DEBUG=linearapp:*` environment flag. Logs all queue operations, batch payloads, retry timings, and server responses.
+### Error Boundaries
+- Global error boundary in main layout
+- Catches React component errors
+- Provides user-friendly error messages
+- Allows error recovery
 
-### Dev Tools Panel
-Hidden "Debug" panel allows you to:
+### Service-Level Error Handling
+- All service methods wrapped in try-catch
+- Returns safe defaults on error
+- Logs errors to console in development
 
-- Inspect current sync queue and operation history
-- Manually "Force Sync"
-- "Simulate Offline" mode
-- "Simulate Server Conflict"
+### Loading States
+- Loading indicators during async operations
+- Loading overlay components
+- Loading state in stores for UI feedback
 
 </details>
 
 <details>
-<summary><strong>Project Directory Layout</strong></summary>
+<summary><strong>State Management Pattern</strong></summary>
 
+### Store Structure
+```typescript
+interface StoreState {
+  // Data
+  items: Item[];
+  isLoading: boolean;
+  error: Error | null;
+  
+  // Actions
+  addItem: (item: Item) => void;
+  updateItem: (id: string, updates: Partial<Item>) => void;
+  // ...
+}
 ```
-src/
-├── api/         # Network adapter, batching utilities
-├── components/  # Presentational & container components
-├── hooks/       # useStore, useSync, useOffline
-├── store/       # Data models, in-memory store, sync queue logic
-├── styles/      # CSS modules, transitions
-├── utils/       # ID generation, diffing, time helpers
-├── workers/     # Optional: Web Worker for heavy tasks
-└── index.tsx    # App entry point
 
-public/
-├── demo.gif
-└── ...
-
-tests/
-└── ...
-```
+### Best Practices
+- Single source of truth
+- Immutable updates
+- Error handling in actions
+- Loading states for async operations
 
 </details>
 
@@ -280,28 +297,33 @@ tests/
 
 ## 🗺️ Roadmap & Future Enhancements
 
-### 📱 Mobile-First UI
-Fully responsive layout with touch-first reordering.
+### 📱 Enhanced Mobile Experience
+Improved mobile responsiveness and touch gestures for drag-and-drop.
 
-### 🚀 Real-time Sync
-WebSockets or SSE for push updates, enabling true multi-user collaboration.
+### 🚀 Backend Integration
+- RESTful API or GraphQL integration
+- Real-time updates with WebSockets
+- Server-side persistence
 
-### 🤖 AI Features
+### 🧪 Testing
+- Unit tests for stores and services
+- Component tests with React Testing Library
+- E2E tests with Playwright
 
-#### Task Triage
-Suggest labels or assignees for new tasks.
+### 🌐 Offline Support (Future)
+- IndexedDB for offline storage
+- Sync queue for offline changes
+- Conflict resolution for concurrent edits
 
-#### Summarization
-Auto-generate descriptions from titles.
+### 🤖 AI Features (Future)
+- Task triage suggestions
+- Auto-generated descriptions
+- Duplicate detection
 
-#### Duplicate Detection
-Flag tasks that look similar.
-
-### 🧩 Integrations
-OAuth (GitHub, Google), Slack notifications.
-
-### 🏢 Workspaces
-Multi-team support with permissions and audit logs.
+### 🧩 Integrations (Future)
+- OAuth authentication
+- Slack notifications
+- GitHub integration
 
 <br>
 
