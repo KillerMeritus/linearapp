@@ -14,6 +14,11 @@ import {
    Clock,
    Zap,
    UserRound,
+   BarChart3,
+   Target,
+   Archive,
+   Calendar,
+   Sparkles,
 } from 'lucide-react';
 
 export const inboxItems = [
@@ -39,6 +44,31 @@ export const workspaceItems = [
       name: 'Projects',
       url: '/piedpiper/projects',
       icon: Box,
+   },
+   {
+      name: 'Views',
+      url: '/piedpiper/views',
+      icon: Layers,
+   },
+   {
+      name: 'Roadmap',
+      url: '/piedpiper/roadmap',
+      icon: Target,
+   },
+   {
+      name: 'Analytics',
+      url: '/piedpiper/analytics',
+      icon: BarChart3,
+   },
+   {
+      name: 'Archive',
+      url: '/piedpiper/archive',
+      icon: Archive,
+   },
+   {
+      name: 'Calendar',
+      url: '/piedpiper/calendar',
+      icon: Calendar,
    },
    {
       name: 'Members',

@@ -26,6 +26,7 @@ import {
 import NotificationPreview from './issue-preview';
 import IssueLine from './issue-line';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import { NotificationBox } from './icons/motification-box';
 
 export default function Inbox() {
    const {
@@ -73,6 +74,36 @@ export default function Inbox() {
    const handleDeleteCompletedIssues = () => {
       console.log('Delete notifications for completed issues');
    };
+
+   // Show empty state content
+   const emptyState = (
+      <div className="w-full h-full flex flex-col items-center justify-center">
+         <div className="flex flex-col items-center justify-center text-center">
+            <NotificationBox className="w-24 h-24 mb-4 text-muted-foreground/30" />
+            <p className="text-sm text-muted-foreground">No notifications</p>
+         </div>
+      </div>
+   );
+
+   // If no notifications, show simple view without panels
+   if (filteredNotifications.length === 0) {
+      return (
+         <div className="w-full h-full flex flex-col">
+            <div className="flex items-center justify-between px-4 h-10 border-b border-border">
+               <div className="flex items-center gap-2">
+                  <SidebarTrigger className="inline-flex lg:hidden" />
+                  <h2 className="text-lg font-semibold">Inbox</h2>
+               </div>
+               <div className="flex items-center gap-2">
+                  <Button variant="ghost" size="xs">
+                     <SlidersHorizontal className="w-4 h-4" />
+                  </Button>
+               </div>
+            </div>
+            {emptyState}
+         </div>
+      );
+   }
 
    return (
       <ResizablePanelGroup
@@ -202,16 +233,20 @@ export default function Inbox() {
                </div>
             </div>
             <div className="w-full flex flex-col items-center justify-start overflow-y-scroll h-[calc(100%-40px)] pb-0.25">
-               {filteredNotifications.map((notification) => (
-                  <IssueLine
-                     key={notification.id}
-                     notification={notification}
-                     isSelected={selectedNotification?.id === notification.id}
-                     onClick={() => setSelectedNotification(notification)}
-                     showId={showId}
-                     showStatusIcon={showStatusIcon}
-                  />
-               ))}
+               {filteredNotifications.length === 0 ? (
+                  emptyState
+               ) : (
+                  filteredNotifications.map((notification) => (
+                     <IssueLine
+                        key={notification.id}
+                        notification={notification}
+                        isSelected={selectedNotification?.id === notification.id}
+                        onClick={() => setSelectedNotification(notification)}
+                        showId={showId}
+                        showStatusIcon={showStatusIcon}
+                     />
+                  ))
+               )}
             </div>
          </ResizablePanel>
          <ResizableHandle withHandle />

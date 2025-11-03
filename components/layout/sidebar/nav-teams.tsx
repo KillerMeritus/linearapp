@@ -12,6 +12,7 @@ import {
    Settings,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import {
@@ -37,10 +38,14 @@ import { RiDonutChartFill } from '@remixicon/react';
 
 export function NavTeams() {
    const joinedTeams = teams.filter((t) => t.joined);
+   const [cyclesOpen, setCyclesOpen] = useState<{ [key: string]: boolean }>({});
+
    return (
       <SidebarGroup>
-         <SidebarGroupLabel>Your teams</SidebarGroupLabel>
-         <SidebarMenu>
+         <SidebarGroupLabel className="text-xs font-semibold text-muted-foreground px-2 mb-1">
+            Your teams
+         </SidebarGroupLabel>
+         <SidebarMenu className="gap-0.5">
             {joinedTeams.map((item, index) => (
                <Collapsible
                   key={item.name}
@@ -50,19 +55,17 @@ export function NavTeams() {
                >
                   <SidebarMenuItem>
                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton tooltip={item.name}>
-                           <div className="inline-flex size-6 bg-muted/50 items-center justify-center rounded shrink-0">
-                              <div className="text-sm">{item.icon}</div>
+                        <SidebarMenuButton tooltip={item.name} className="h-7 px-2 gap-1.5 hover:bg-sidebar-accent/50">
+                           <div className="inline-flex size-4 items-center justify-center shrink-0">
+                              <div className="text-xs leading-none">{item.icon}</div>
                            </div>
-                           <span className="text-sm">{item.name}</span>
-                           <span className="w-3 shrink-0">
-                              <ChevronRight className="w-full transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                           </span>
+                           <span className="text-[13px] font-normal leading-none">{item.name}</span>
+                           <ChevronRight className="h-3 w-3 ml-auto shrink-0 text-muted-foreground/50 transition-transform duration-150 group-data-[state=open]/collapsible:rotate-90" />
                            <DropdownMenu>
                               <DropdownMenuTrigger asChild>
-                                 <SidebarMenuAction asChild showOnHover>
+                                 <SidebarMenuAction asChild showOnHover className="h-5 w-5">
                                     <div>
-                                       <MoreHorizontal />
+                                       <MoreHorizontal className="h-3.5 w-3.5" />
                                        <span className="sr-only">More</span>
                                     </div>
                                  </SidebarMenuAction>
@@ -97,37 +100,54 @@ export function NavTeams() {
                            </DropdownMenu>
                         </SidebarMenuButton>
                      </CollapsibleTrigger>
-                     <CollapsibleContent>
-                        <SidebarMenuSub>
+                     <CollapsibleContent className="pb-0">
+                        <SidebarMenuSub className="gap-0 border-l-0 ml-3 pl-0">
                            <SidebarMenuSubItem>
-                              <SidebarMenuSubButton asChild>
-                                 <Link href="/piedpiper/team/CORE/all">
-                                    <CopyMinus size={14} />
-                                    <span>Issues</span>
+                              <SidebarMenuSubButton asChild className="h-7 px-2 gap-1.5 hover:bg-sidebar-accent/50">
+                                 <Link href={`/piedpiper/team/${item.id}/all`}>
+                                    <CopyMinus size={14} className="text-muted-foreground/70" />
+                                    <span className="text-[13px] font-normal">Issues</span>
                                  </Link>
                               </SidebarMenuSubButton>
                            </SidebarMenuSubItem>
                            <SidebarMenuSubItem>
-                              <SidebarMenuSubButton asChild>
-                                 <Link href="/piedpiper/team/CORE/all">
-                                    <RiDonutChartFill size={14} />
-                                    <span>Cycles</span>
-                                 </Link>
-                              </SidebarMenuSubButton>
+                              <Collapsible
+                                 open={cyclesOpen[item.id]}
+                                 onOpenChange={(open) => setCyclesOpen({ ...cyclesOpen, [item.id]: open })}
+                              >
+                                 <CollapsibleTrigger asChild>
+                                    <SidebarMenuSubButton className="h-7 px-2 gap-1.5 hover:bg-sidebar-accent/50">
+                                       <RiDonutChartFill size={14} className="text-muted-foreground/70" />
+                                       <span className="text-[13px] font-normal">Cycles</span>
+                                       <ChevronRight className="h-3 w-3 ml-auto shrink-0 text-muted-foreground/50 transition-transform duration-150 data-[state=open]:rotate-90" />
+                                    </SidebarMenuSubButton>
+                                 </CollapsibleTrigger>
+                                 <CollapsibleContent className="pb-0">
+                                    <SidebarMenuSub className="gap-0 border-l-0 ml-5 pl-0">
+                                       <SidebarMenuSubItem>
+                                          <SidebarMenuSubButton asChild className="h-7 px-2 gap-1.5 hover:bg-sidebar-accent/50">
+                                             <Link href={`/piedpiper/team/${item.id}/cycles/upcoming`}>
+                                                <span className="text-[13px] font-normal">Upcoming</span>
+                                             </Link>
+                                          </SidebarMenuSubButton>
+                                       </SidebarMenuSubItem>
+                                    </SidebarMenuSub>
+                                 </CollapsibleContent>
+                              </Collapsible>
                            </SidebarMenuSubItem>
                            <SidebarMenuSubItem>
-                              <SidebarMenuSubButton asChild>
+                              <SidebarMenuSubButton asChild className="h-7 px-2 gap-1.5 hover:bg-sidebar-accent/50">
                                  <Link href="/piedpiper/projects">
-                                    <Box size={14} />
-                                    <span>Projects</span>
+                                    <Box size={14} className="text-muted-foreground/70" />
+                                    <span className="text-[13px] font-normal">Projects</span>
                                  </Link>
                               </SidebarMenuSubButton>
                            </SidebarMenuSubItem>
                            <SidebarMenuSubItem>
-                              <SidebarMenuSubButton asChild>
+                              <SidebarMenuSubButton asChild className="h-7 px-2 gap-1.5 hover:bg-sidebar-accent/50">
                                  <Link href="#">
-                                    <Layers size={14} />
-                                    <span>Views</span>
+                                    <Layers size={14} className="text-muted-foreground/70" />
+                                    <span className="text-[13px] font-normal">Views</span>
                                  </Link>
                               </SidebarMenuSubButton>
                            </SidebarMenuSubItem>

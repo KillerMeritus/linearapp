@@ -1,16 +1,19 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
-const geistSans = Geist({
-   variable: '--font-geist-sans',
+const inter = Inter({
+   variable: '--font-inter',
    subsets: ['latin'],
+   display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-   variable: '--font-geist-mono',
+const interDisplay = Inter({
+   variable: '--font-inter-display',
    subsets: ['latin'],
+   weight: ['600', '700', '800'],
+   display: 'swap',
 });
 
 const siteUrl = 'https://scaler-hackathon.piedpiper.dev';
@@ -65,7 +68,7 @@ export default function RootLayout({
          <head>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
          </head>
-         <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}>
+         <body className={`${inter.variable} ${interDisplay.variable} antialiased bg-background`}>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
                {children}
                <Toaster />

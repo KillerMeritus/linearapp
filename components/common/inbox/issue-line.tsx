@@ -38,12 +38,17 @@ export default function IssueLine({
          >
             <div className="relative flex-shrink-0">
                <Avatar className="size-8">
-                  <AvatarImage src={notification.user.avatarUrl} alt={notification.user.name} />
+                  <AvatarImage
+                     src={notification.user?.avatarUrl}
+                     alt={notification.user?.name || 'User'}
+                  />
                   <AvatarFallback className="text-xs">
-                     {notification.user.name
-                        .split(' ')
-                        .map((n) => n[0])
-                        .join('')}
+                     {notification.user?.name
+                        ? notification.user.name
+                             .split(' ')
+                             .map((n) => n[0])
+                             .join('')
+                        : 'U'}
                   </AvatarFallback>
                </Avatar>
 

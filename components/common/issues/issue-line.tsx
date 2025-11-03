@@ -1,5 +1,6 @@
 'use client';
 
+import * as React from 'react';
 import { Issue } from '@/data/issues';
 import { format } from 'date-fns';
 import { AssigneeUser } from './assignee-user';
@@ -7,20 +8,25 @@ import { LabelBadge } from './label-badge';
 import { PrioritySelector } from './priority-selector';
 import { ProjectBadge } from './project-badge';
 import { StatusSelector } from './status-selector';
+import { IssueDetailModal } from './issue-detail-modal';
 import { motion } from 'motion/react';
 
 import { ContextMenu, ContextMenuTrigger } from '@/components/ui/context-menu';
 import { IssueContextMenu } from './issue-context-menu';
 
 export function IssueLine({ issue, layoutId = false }: { issue: Issue; layoutId?: boolean }) {
+   const [detailOpen, setDetailOpen] = React.useState(false);
+
    return (
-      <ContextMenu>
-         <ContextMenuTrigger asChild>
-            <motion.div
-               {...(layoutId && { layoutId: `issue-line-${issue.identifier}` })}
-               //href={`/piedpiper/issue/${issue.identifier}`}
-               className="w-full flex items-center justify-start h-11 px-6 hover:bg-sidebar/50"
-            >
+      <>
+         <IssueDetailModal issue={issue} open={detailOpen} onOpenChange={setDetailOpen} />
+         <ContextMenu>
+            <ContextMenuTrigger asChild>
+               <motion.div
+                  {...(layoutId && { layoutId: `issue-line-${issue.identifier}` })}
+                  onClick={() => setDetailOpen(true)}
+                  className="w-full flex items-center justify-start h-11 px-6 hover:bg-sidebar/50 cursor-pointer"
+               >
                <div className="flex items-center gap-0.5">
                   <PrioritySelector priority={issue.priority} issueId={issue.id} />
                   <span className="text-sm hidden sm:inline-block text-muted-foreground font-medium w-[66px] truncate shrink-0 mr-0.5">
@@ -48,5 +54,6 @@ export function IssueLine({ issue, layoutId = false }: { issue: Issue; layoutId?
          </ContextMenuTrigger>
          <IssueContextMenu issueId={issue.id} />
       </ContextMenu>
+      </>
    );
 }

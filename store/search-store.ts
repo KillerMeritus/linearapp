@@ -1,23 +1,37 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface SearchState {
-   isSearchOpen: boolean;
    searchQuery: string;
+   recentSearches: string[];
 
-   openSearch: () => void;
-   closeSearch: () => void;
-   toggleSearch: () => void;
    setSearchQuery: (query: string) => void;
+   addRecentSearch: (query: string) => void;
+   clearRecentSearches: () => void;
    resetSearch: () => void;
 }
 
-export const useSearchStore = create<SearchState>((set) => ({
-   isSearchOpen: false,
-   searchQuery: '',
+export const useSearchStore = create<SearchState>()(
+   persist(
+      (set) => ({
+         searchQuery: '',
+         recentSearches: [],
 
-   openSearch: () => set({ isSearchOpen: true }),
-   closeSearch: () => set({ isSearchOpen: false }),
-   toggleSearch: () => set((state) => ({ isSearchOpen: !state.isSearchOpen })),
-   setSearchQuery: (query: string) => set({ searchQuery: query }),
-   resetSearch: () => set({ isSearchOpen: false, searchQuery: '' }),
-}));
+         setSearchQuery: (query: string) => set({ searchQuery: query }),
+         addRecentSearch: (query: string) =>
+            set((state) => {
+               if (!query.trim() || state.recentSearches.includes(query)) {
+                  return state;
+               }
+               const newSearches = [query, ...state.recentSearches].slice(0, 5);
+               return { recentSearches: newSearches };
+            }),
+         clearRecentSearches: () => set({ recentSearches: [] }),
+         resetSearch: () => set({ searchQuery: '' }),
+      }),
+      {
+         name: 'search-storage',
+         partialize: (state) => ({ recentSearches: state.recentSearches }),
+      }
+   )
+);
