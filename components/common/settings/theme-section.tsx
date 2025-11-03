@@ -31,12 +31,13 @@ export function ThemeSection() {
       setMounted(true);
    }, []);
 
-   // Sync theme on mount
+   // Sync theme on mount only once
    React.useEffect(() => {
-      if (mounted && themePreferences.interfaceTheme && themePreferences.interfaceTheme !== theme) {
+      if (mounted && themePreferences.interfaceTheme) {
          setTheme(themePreferences.interfaceTheme);
       }
-   }, [mounted, themePreferences.interfaceTheme, theme, setTheme]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [mounted]);
 
    const handleThemeChange = (newTheme: 'light' | 'dark' | 'system') => {
       updateTheme(newTheme);

@@ -19,6 +19,19 @@ import {
    Archive,
    Calendar,
    Sparkles,
+   Shield,
+   Code,
+   CreditCard,
+   ArrowLeftRight,
+   Building2,
+   UsersRound,
+   CheckCircle2,
+   FileUp,
+   Smile,
+   Bot,
+   MessageCircleQuestion,
+   Flame,
+   CircleDot,
 } from 'lucide-react';
 
 export const inboxItems = [
@@ -78,11 +91,6 @@ export const workspaceItems = [
 ];
 
 export const accountItems = [
-   {
-      name: 'Account',
-      url: '/settings/account',
-      icon: UserRound,
-   },
    {
       name: 'Preferences',
       url: '/settings/preferences',
@@ -185,19 +193,14 @@ export const workspaceSettingsItems = [
 
 export const accountSettingsItems = [
    {
-      name: 'Profile',
-      url: '/piedpiper/settings/profile',
-      icon: UserRound,
-   },
-   {
       name: 'Preferences',
       url: '/piedpiper/settings/preferences',
       icon: Settings,
    },
    {
-      name: 'Linked Accounts',
-      url: '/piedpiper/settings/linked-accounts',
-      icon: Users,
+      name: 'Profile',
+      url: '/piedpiper/settings/profile',
+      icon: UserRound,
    },
    {
       name: 'Notifications',
@@ -205,9 +208,14 @@ export const accountSettingsItems = [
       icon: Bell,
    },
    {
-      name: 'Applications, API',
-      url: '/piedpiper/settings/api',
+      name: 'Security & access',
+      url: '/piedpiper/settings/security',
       icon: KeyRound,
+   },
+   {
+      name: 'Connected accounts',
+      url: '/piedpiper/settings/connected-accounts',
+      icon: Users,
    },
 ];
 
@@ -256,5 +264,138 @@ export const featuresItems = [
       name: 'Integrations',
       url: '/settings/integrations',
       icon: Zap,
+   },
+];
+
+// Settings sidebar navigation items (matches the image structure)
+export const settingsIssuesItems = [
+   {
+      name: 'Labels',
+      url: '/piedpiper/settings/issues/labels',
+      icon: Tag,
+   },
+   {
+      name: 'Templates',
+      url: '/piedpiper/settings/issues/templates',
+      icon: FileText,
+   },
+   {
+      name: 'SLAs',
+      url: '/piedpiper/settings/issues/slas',
+      icon: Clock,
+   },
+];
+
+export const settingsProjectsItems = [
+   {
+      name: 'Labels',
+      url: '/piedpiper/settings/projects/labels',
+      icon: Tag,
+   },
+   {
+      name: 'Templates',
+      url: '/piedpiper/settings/projects/templates',
+      icon: FileText,
+   },
+   {
+      name: 'Statuses',
+      url: '/piedpiper/settings/projects/statuses',
+      icon: CircleDot,
+   },
+   {
+      name: 'Updates',
+      url: '/piedpiper/settings/projects/updates',
+      icon: CheckCircle2,
+   },
+];
+
+export const settingsFeaturesItems = [
+   {
+      name: 'Initiatives',
+      url: '/piedpiper/settings/features/initiatives',
+      icon: Target,
+   },
+   {
+      name: 'Documents',
+      url: '/piedpiper/settings/features/documents',
+      icon: FileText,
+   },
+   {
+      name: 'Customer requests',
+      url: '/piedpiper/settings/features/customer-requests',
+      icon: MessageCircleQuestion,
+   },
+   {
+      name: 'Pulse',
+      url: '/piedpiper/settings/features/pulse',
+      icon: Flame,
+   },
+   {
+      name: 'AI',
+      url: '/piedpiper/settings/features/ai',
+      icon: Sparkles,
+   },
+   {
+      name: 'Agents',
+      url: '/piedpiper/settings/features/agents',
+      icon: Bot,
+   },
+   {
+      name: 'Asks',
+      url: '/piedpiper/settings/features/asks',
+      icon: MessageCircleQuestion,
+   },
+   {
+      name: 'Emojis',
+      url: '/piedpiper/settings/features/emojis',
+      icon: Smile,
+   },
+   {
+      name: 'Integrations',
+      url: '/piedpiper/settings/features/integrations',
+      icon: Zap,
+   },
+];
+
+export const settingsAdministrationItems = [
+   {
+      name: 'Workspace',
+      url: '/piedpiper/settings/administration/workspace',
+      icon: Building2,
+   },
+   {
+      name: 'Teams',
+      url: '/piedpiper/settings/administration/teams',
+      icon: UsersRound,
+   },
+   {
+      name: 'Members',
+      url: '/piedpiper/settings/administration/members',
+      icon: Users,
+   },
+   {
+      name: 'Security',
+      url: '/piedpiper/settings/administration/security',
+      icon: Shield,
+   },
+   {
+      name: 'API',
+      url: '/piedpiper/settings/administration/api',
+      icon: Code,
+   },
+   {
+      name: 'Applications',
+      url: '/piedpiper/settings/administration/applications',
+      icon: Box,
+   },
+   {
+      name: 'Billing',
+      url: '/piedpiper/settings/administration/billing',
+      icon: CreditCard,
+   },
+   {
+      name: 'Import / Export',
+      url: '/piedpiper/settings/administration/import-export',
+      icon: ArrowLeftRight,
    },
 ];

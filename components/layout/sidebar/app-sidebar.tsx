@@ -12,6 +12,10 @@ import { NavFeatures } from '@/components/layout/sidebar/nav-features';
 import { NavTeamsSettings } from '@/components/layout/sidebar/nav-teams-settings';
 import { NavWorkspaceSettings } from '@/components/layout/sidebar/nav-workspace-settings';
 import { NavAccountSettings } from '@/components/layout/sidebar/nav-account-settings';
+import { NavSettingsIssues } from '@/components/layout/sidebar/nav-settings-issues';
+import { NavSettingsProjects } from '@/components/layout/sidebar/nav-settings-projects';
+import { NavSettingsFeatures } from '@/components/layout/sidebar/nav-settings-features';
+import { NavSettingsAdministration } from '@/components/layout/sidebar/nav-settings-administration';
 import { OrgSwitcher } from '@/components/layout/sidebar/org-switcher';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from '@/components/ui/sidebar';
 import { usePathname } from 'next/navigation';
@@ -28,8 +32,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
          <SidebarContent className="px-2 pt-3 gap-4">
             {isSettings ? (
                <>
-                  <NavWorkspaceSettings />
                   <NavAccountSettings />
+                  <NavSettingsIssues />
+                  <NavSettingsProjects />
+                  <NavSettingsFeatures />
+                  <NavSettingsAdministration />
                   <NavTeamsSettings />
                </>
             ) : (
