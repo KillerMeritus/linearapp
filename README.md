@@ -33,8 +33,8 @@ A comprehensive project management interface featuring issue tracking, team coll
 ### Clone the repository
 
 ```shell
-git clone https://github.com/pied-piper/scaler-hackathon.git
-cd scaler-hackathon
+git clone https://github.com/KillerMeritus/linearapp.git
+cd linearapp/
 ```
 
 ### Install dependencies
