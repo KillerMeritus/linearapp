@@ -19,7 +19,7 @@ const inboxItems = [
    },
    {
       name: 'My issues',
-      url: '#',
+      url: '/piedpiper/my-issues',
       icon: MyIssuesIcon,
    },
 ];
@@ -31,7 +31,9 @@ export function NavInbox() {
       <SidebarGroup className="group-data-[collapsible=icon]:hidden">
          <SidebarMenu className="gap-0.5">
             {inboxItems.map((item) => {
-               const isActive = pathname === item.url || (item.url === '/piedpiper/inbox' && pathname.includes('/inbox'));
+               const isActive = pathname === item.url ||
+                  (item.url === '/piedpiper/inbox' && pathname.includes('/inbox')) ||
+                  (item.url === '/piedpiper/my-issues' && pathname.includes('/my-issues'));
                const Icon = item.icon;
                return (
                   <SidebarMenuItem key={item.name}>

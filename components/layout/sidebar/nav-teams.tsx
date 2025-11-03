@@ -4,13 +4,14 @@ import {
    Archive,
    Bell,
    Box,
-   ChevronRight,
    CopyMinus,
    Layers,
    Link as LinkIcon,
    MoreHorizontal,
    Settings,
+   ChevronRight,
 } from 'lucide-react';
+import { RiArrowDropRightFill } from '@remixicon/react';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -39,13 +40,19 @@ import { RiDonutChartFill } from '@remixicon/react';
 export function NavTeams() {
    const joinedTeams = teams.filter((t) => t.joined);
    const [cyclesOpen, setCyclesOpen] = useState<{ [key: string]: boolean }>({});
+   const [isOpen, setIsOpen] = useState(true);
 
    return (
-      <SidebarGroup>
-         <SidebarGroupLabel className="text-xs font-semibold text-muted-foreground px-2 mb-1">
-            Your teams
-         </SidebarGroupLabel>
-         <SidebarMenu className="gap-0.5">
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+         <SidebarGroup>
+            <CollapsibleTrigger className="w-full">
+               <SidebarGroupLabel className="text-[13px] font-semibold text-muted-foreground px-2 mb-1 flex items-center gap-1 hover:bg-sidebar-accent/50 rounded-md py-1 cursor-pointer">
+                  <span>Your teams</span>
+                  <RiArrowDropRightFill className="h-5 w-5 transition-transform duration-150" style={{ transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)' }} />
+               </SidebarGroupLabel>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+               <SidebarMenu className="gap-0.5">
             {joinedTeams.map((item, index) => (
                <Collapsible
                   key={item.name}
@@ -156,7 +163,9 @@ export function NavTeams() {
                   </SidebarMenuItem>
                </Collapsible>
             ))}
-         </SidebarMenu>
-      </SidebarGroup>
+               </SidebarMenu>
+            </CollapsibleContent>
+         </SidebarGroup>
+      </Collapsible>
    );
 }
