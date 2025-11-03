@@ -21,7 +21,7 @@
 <br>
 
 <p align="center">
-  <strong><a href="https://scaler-hackathon.piedpiper.dev">🔴 LIVE DEMO</a></strong>
+  <strong><a href="https://www.loom.com/share/84991916b2c04f8eb3a0eb9a97450adc">🔴 LIVE DEMO</a></strong>
 </p>
 
 
