@@ -1,27 +1,24 @@
 {
   "app": {
-    "[project]/Downloads/linearapp/app/[orgId]/page": [
+    "[project]/app/[orgId]/projects/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
-    "[project]/Downloads/linearapp/app/[orgId]/settings/page": [
+    "[project]/app/[orgId]/settings/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
-    "[project]/Downloads/linearapp/app/[orgId]/settings/preferences/page": [
+    "[project]/app/[orgId]/settings/preferences/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
-    "[project]/Downloads/linearapp/app/[orgId]/settings/profile/page": [
+    "[project]/app/[orgId]/settings/profile/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
-    "[project]/Downloads/linearapp/app/[orgId]/team/[teamId]/all/page": [
+    "[project]/app/[orgId]/team/[teamId]/all/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
-    "[project]/Downloads/linearapp/app/[orgId]/teams/page": [
+    "[project]/app/_not-found/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
-    "[project]/Downloads/linearapp/app/_not-found/page": [
-      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
-    ],
-    "[project]/Downloads/linearapp/app/page": [
+    "[project]/app/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ]
   },

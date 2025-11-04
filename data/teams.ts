@@ -9,9 +9,20 @@ export interface Team {
    color: string;
    members: User[];
    projects: Project[];
+   archived?: boolean;
+   workspaceId?: string;
 }
 
 export const teams: Team[] = [
+   {
+      id: 'PIEDPIPER',
+      name: 'Pied Piper',
+      icon: '🧠',
+      joined: true,
+      color: '#6EE7B7',
+      members: [users[0], users[1], users[2], users[3]],
+      projects: [projects[0], projects[1], projects[2]],
+   },
    {
       id: 'CORE',
       name: 'Core Team',

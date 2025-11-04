@@ -93,11 +93,6 @@ export function NavWorkspace() {
                            ))}
                            <DropdownMenuSeparator />
                            <DropdownMenuItem>
-                              <RiPresentationLine className="text-muted-foreground h-4 w-4" />
-                              <span>Initiatives</span>
-                           </DropdownMenuItem>
-                           <DropdownMenuSeparator />
-                           <DropdownMenuItem>
                               <LayoutList className="text-muted-foreground h-4 w-4" />
                               <span>Customize sidebar</span>
                            </DropdownMenuItem>

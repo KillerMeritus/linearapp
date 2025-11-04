@@ -1,147 +1,17 @@
-[00:00:00.937] Server  LOG      ✓ Ready in 684ms
-[00:00:13.086] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:11.713] Browser ERROR   ErrorBoundary caught an error: {} {"componentStack":"\n    at button (<anonymous>)\n    at Primitive.button (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:8528:17)\n    at SlotClone (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:6505:13)\n    at Slot (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:6478:13)\n    at Primitive.div (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:8528:17)\n    at PopperAnchor (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:14946:13)\n    at SelectTrigger (http://localhost:3002/_next/static/chunks/c567d_%40radix-ui_react-select_dist_index_mjs_e4109e7b._.js:233:13)\n    at SelectTrigger (http://localhost:3002/_next/static/chunks/Downloads_linearapp_components_ui_04353c6e._.js:1433:26)\n    at Provider (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:8028:21)\n    at Provider (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:8028:21)\n    at CollectionProvider (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:9261:17)\n    at Provider (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:8028:21)\n    at Provider (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:8028:21)\n    at Popper (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:14934:13)\n    at Select (http://localhost:3002/_next/static/chunks/c567d_%40radix-ui_react-select_dist_index_mjs_e4109e7b._.js:144:13)\n    at Select (http://localhost:3002/_next/static/chunks/Downloads_linearapp_components_ui_04353c6e._.js:1400:22)\n    at div (<anonymous>)\n    at div (<anonymous>)\n    at ThemeSection (http://localhost:3002/_next/static/chunks/Downloads_linearapp_components_fcf9a142._.js:8173:359)\n    at div (<anonymous>)\n    at div (<anonymous>)\n    at div (<anonymous>)\n    at PreferencesContent (<anonymous>)\n    at div (<anonymous>)\n    at div (<anonymous>)\n    at div (<anonymous>)\n    at DndProvider (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:6186:11)\n    at div (<anonymous>)\n    at Provider (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:8028:21)\n    at TooltipProvider (http://localhost:3002/_next/static/chunks/c95e4__pnpm_eb2a5643._.js:22946:13)\n    at TooltipProvider (http://localhost:3002/_next/static/chunks/Downloads_linearapp_components_ui_04353c6e._.js:1903:28)\n    at SidebarProvider (http://localhost:3002/_next/static/chunks/Downloads_linearapp_components_ui_04353c6e._.js:2070:28)\n    at ErrorBoundary (http://localhost:3002/_next/static/chunks/Downloads_linearapp_components_common_5c4bf466._.js:4509:9)\n    at MainLayout (http://localhost:3002/_next/static/chunks/Downloads_linearapp_components_layout_76975d88._.js:5768:23)\n    at PreferencesPage (about://React/Server/file:///Users/viveksarathe/Downloads/linearapp/.next/dev/server/chunks/ssr/%5Broot-of-the-server%5D__eb65375f._.js?21:171:436)\n    at SegmentViewNode (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_490ee9fa._.js:3332:28)\n    at InnerLayoutRouter (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:390:34)\n    at RedirectErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9060:9)\n    at RedirectBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9102:29)\n    at HTTPAccessFallbackBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9625:39)\n    at LoadingBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:496:32)\n    at ErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:1048:26)\n    at InnerScrollAndFocusHandler (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:290:9)\n    at ScrollAndFocusHandler (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:373:34)\n    at RenderFromTemplateContext (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:769:44)\n    at SegmentStateProvider (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_490ee9fa._.js:3348:33)\n    at OuterLayoutRouter (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:532:30)\n    at InnerLayoutRouter (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:390:34)\n    at RedirectErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9060:9)\n    at RedirectBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9102:29)\n    at HTTPAccessFallbackBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9625:39)\n    at LoadingBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:496:32)\n    at ErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:1048:26)\n    at InnerScrollAndFocusHandler (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:290:9)\n    at ScrollAndFocusHandler (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:373:34)\n    at RenderFromTemplateContext (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:769:44)\n    at SegmentStateProvider (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_490ee9fa._.js:3348:33)\n    at OuterLayoutRouter (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:532:30)\n    at InnerLayoutRouter (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:390:34)\n    at RedirectErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9060:9)\n    at RedirectBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9102:29)\n    at HTTPAccessFallbackBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9625:39)\n    at LoadingBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:496:32)\n    at ErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:1048:26)\n    at InnerScrollAndFocusHandler (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:290:9)\n    at ScrollAndFocusHandler (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:373:34)\n    at RenderFromTemplateContext (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:769:44)\n    at SegmentStateProvider (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_490ee9fa._.js:3348:33)\n    at OuterLayoutRouter (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:532:30)\n    at InnerLayoutRouter (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:390:34)\n    at RedirectErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9060:9)\n    at RedirectBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9102:29)\n    at HTTPAccessFallbackErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9550:9)\n    at HTTPAccessFallbackBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9625:39)\n    at LoadingBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:496:32)\n    at ErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:1048:26)\n    at InnerScrollAndFocusHandler (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:290:9)\n    at ScrollAndFocusHandler (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:373:34)\n    at RenderFromTemplateContext (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:769:44)\n    at SegmentStateProvider (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_490ee9fa._.js:3348:33)\n    at OuterLayoutRouter (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_2945150f._.js:532:30)\n    at _ (http://localhost:3002/_next/static/chunks/c95e4__pnpm_f51df706._.js:280:24)\n    at J (http://localhost:3002/_next/static/chunks/c95e4__pnpm_f51df706._.js:275:352)\n    at ThemeProvider (http://localhost:3002/_next/static/chunks/Downloads_linearapp_components_63e06abe._.js:63:26)\n    at body (<anonymous>)\n    at html (<anonymous>)\n    at RootLayout [Server] (<anonymous>)\n    at SegmentViewNode (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_490ee9fa._.js:3332:28)\n    at __next_root_layout_boundary__ (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_490ee9fa._.js:1699:64)\n    at RedirectErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9060:9)\n    at RedirectBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9102:29)\n    at HTTPAccessFallbackErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9550:9)\n    at HTTPAccessFallbackBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9625:39)\n    at DevRootHTTPAccessFallbackBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9694:46)\n    at AppDevOverlayErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_490ee9fa._.js:3443:9)\n    at HotReload (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:10681:22)\n    at Router (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:10839:23)\n    at ErrorBoundaryHandler (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:982:9)\n    at ErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:1048:26)\n    at RootErrorBoundary (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:9374:30)\n    at AppRouter (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:11156:22)\n    at ServerRoot (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:12673:23)\n    at Root (http://localhost:3002/_next/static/chunks/8a1ff_next_dist_client_4749aadb._.js:12691:17)"}
-[00:03:02.021] Server  LOG      ✓ Compiled in 135ms
-[00:03:23.349] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:03:23.839] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-%s%s https://react.dev/link/hydration-mismatch 
-
-  ...
-    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
-      <AppDevOverlayErrorBoundary globalError={[...]}>
-        <ReplaySsrOnlyErrors>
-        <DevRootHTTPAccessFallbackBoundary>
-          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/piedpiper..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
-              <RedirectBoundary>
-                <RedirectErrorBoundary router={{...}}>
-                  <Head>
-                  <__next_root_layout_boundary__>
-                    <SegmentViewNode type="layout" pagePath="/Downloads...">
-                      <SegmentTrieNode>
-                      <link>
-                      <script>
-                      <script>
-                      <script>
-                      <RootLayout>
-                        <html lang="en" suppressHydrationWarning={true}>
-                          <head>
-                          <body
-                            className="inter_7b064e0d-module__MOT0tq__variable inter_88572485-module__tBj5ca__variable..."
--                           cz-shortcut-listen="true"
-                          >
-                  ...
-
-[00:08:43.531] Server  LOG      ✓ Compiled in 133ms
-[00:08:51.876] Server  LOG      ✓ Compiled in 57ms
-[00:10:48.777] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:20:35.679] Server  LOG      ✓ Compiled in 196ms
-[00:21:43.125] Server  LOG      ✓ Compiled in 58ms
-[00:21:51.395] Server  LOG      ✓ Compiled in 182ms
-[00:22:10.818] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:22:10.818] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:22:10.818] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:22:10.818] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:23:48.488] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:23:49.080] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-%s%s https://react.dev/link/hydration-mismatch 
-
-  ...
-    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
-      <AppDevOverlayErrorBoundary globalError={[...]}>
-        <ReplaySsrOnlyErrors>
-        <DevRootHTTPAccessFallbackBoundary>
-          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/piedpiper..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
-              <RedirectBoundary>
-                <RedirectErrorBoundary router={{...}}>
-                  <Head>
-                  <__next_root_layout_boundary__>
-                    <SegmentViewNode type="layout" pagePath="/Downloads...">
-                      <SegmentTrieNode>
-                      <link>
-                      <script>
-                      <script>
-                      <script>
-                      <RootLayout>
-                        <html lang="en" suppressHydrationWarning={true}>
-                          <head>
-                          <body
-                            className="inter_7b064e0d-module__MOT0tq__variable inter_88572485-module__tBj5ca__variable..."
--                           cz-shortcut-listen="true"
-                          >
-                  ...
-
-[00:27:44.487] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:27:44.949] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-%s%s https://react.dev/link/hydration-mismatch 
-
-  ...
-    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
-      <AppDevOverlayErrorBoundary globalError={[...]}>
-        <ReplaySsrOnlyErrors>
-        <DevRootHTTPAccessFallbackBoundary>
-          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/piedpiper..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
-              <RedirectBoundary>
-                <RedirectErrorBoundary router={{...}}>
-                  <Head>
-                  <__next_root_layout_boundary__>
-                    <SegmentViewNode type="layout" pagePath="/Downloads...">
-                      <SegmentTrieNode>
-                      <link>
-                      <script>
-                      <script>
-                      <script>
-                      <RootLayout>
-                        <html lang="en" suppressHydrationWarning={true}>
-                          <head>
-                          <body
-                            className="inter_7b064e0d-module__MOT0tq__variable inter_88572485-module__tBj5ca__variable..."
--                           cz-shortcut-listen="true"
-                          >
-                  ...
-
-[00:27:50.270] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:28:15.592] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:28:27.500] Browser ERROR   `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.
+[00:00:01.266] Server  LOG      ✓ Ready in 962ms
+[00:00:09.965] Server  ERROR   (node:26334) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+[00:00:22.204] Browser ERROR   Failed to fetch RSC payload for http://localhost:3002/piedpiper/views. Falling back to browser navigation. {}
+[00:05:35.122] Browser ERROR   Failed to fetch RSC payload for http://localhost:3002/piedpiper/settings/security. Falling back to browser navigation. {}
+[00:08:55.863] Browser ERROR   `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.
 
 If you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.
 
 For more information, see https://radix-ui.com/primitives/docs/components/dialog
-[00:28:27.501] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:28:27.501] Browser ERROR   `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.
+[00:08:55.863] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:08:55.863] Browser ERROR   `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users.
 
 If you want to hide the `DialogTitle`, you can wrap it with our VisuallyHidden component.
 
 For more information, see https://radix-ui.com/primitives/docs/components/dialog
-[00:28:27.501] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
-[00:29:55.574] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:31:38.833] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:55.863] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.

@@ -3,8 +3,15 @@
 import React from 'react';
 import { AppSidebar } from '@/components/layout/sidebar/app-sidebar';
 import { SidebarProvider } from '@/components/ui/sidebar';
-import { CreateIssueModalProvider } from '@/components/common/issues/create-issue-modal-provider';
-import { CommandPalette } from '@/components/common/command-palette';
+import dynamic from 'next/dynamic';
+const CreateIssueModalProvider = dynamic(
+   () => import('@/components/common/issues/create-issue-modal-provider').then((m) => m.CreateIssueModalProvider),
+   { ssr: false }
+);
+const CommandPalette = dynamic(
+   () => import('@/components/common/command-palette').then((m) => m.CommandPalette),
+   { ssr: false }
+);
 import { ErrorBoundary } from '@/components/common/error-boundary';
 import { ThemeInitializer } from '@/components/common/theme-initializer';
 import { DndProvider } from 'react-dnd';

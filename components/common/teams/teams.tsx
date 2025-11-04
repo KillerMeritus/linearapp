@@ -1,15 +1,19 @@
 'use client';
 
-import { teams as allTeams } from '@/data/teams';
 import TeamLine from './team-line';
 import { useTeamsFilterStore } from '@/store/team-filter-store';
 import { useMemo } from 'react';
+import { useParams } from 'next/navigation';
+import { useTeamsStore } from '@/store/teams-store';
 
 export default function Teams() {
    const { filters, sort } = useTeamsFilterStore();
+   const params = useParams<{ orgId?: string }>();
+   const orgId = params?.orgId ?? 'default';
+   const getTeamsByWorkspace = useTeamsStore((s) => s.getTeamsByWorkspace);
 
    const displayed = useMemo(() => {
-      let list = allTeams.slice();
+      let list = getTeamsByWorkspace(orgId).slice();
 
       // filter by membership
       if (filters.membership.length > 0) {
@@ -46,7 +50,7 @@ export default function Teams() {
       };
 
       return list.sort(compare);
-   }, [filters, sort]);
+   }, [filters, sort, orgId, getTeamsByWorkspace]);
 
    return (
       <div className="w-full">

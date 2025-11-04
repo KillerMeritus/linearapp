@@ -54,36 +54,6 @@ export const workspaceItems = [
       icon: ContactRound,
    },
    {
-      name: 'Projects',
-      url: '/piedpiper/projects',
-      icon: Box,
-   },
-   {
-      name: 'Views',
-      url: '/piedpiper/views',
-      icon: Layers,
-   },
-   {
-      name: 'Roadmap',
-      url: '/piedpiper/roadmap',
-      icon: Target,
-   },
-   {
-      name: 'Analytics',
-      url: '/piedpiper/analytics',
-      icon: BarChart3,
-   },
-   {
-      name: 'Archive',
-      url: '/piedpiper/archive',
-      icon: Archive,
-   },
-   {
-      name: 'Calendar',
-      url: '/piedpiper/calendar',
-      icon: Calendar,
-   },
-   {
       name: 'Members',
       url: '/piedpiper/members',
       icon: UserRound,

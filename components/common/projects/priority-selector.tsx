@@ -17,9 +17,10 @@ import { useId, useState } from 'react';
 interface PrioritySelectorProps {
    priority: Priority;
    onPriorityChange?: (priorityId: string) => void;
+   buttonText?: string; // Optional custom text for the trigger button
 }
 
-export function PrioritySelector({ priority, onPriorityChange }: PrioritySelectorProps) {
+export function PrioritySelector({ priority, onPriorityChange, buttonText }: PrioritySelectorProps) {
    const id = useId();
    const [open, setOpen] = useState<boolean>(false);
    const [value, setValue] = useState<string>(priority.id);
@@ -39,9 +40,9 @@ export function PrioritySelector({ priority, onPriorityChange }: PrioritySelecto
             <PopoverTrigger asChild>
                <Button
                   id={id}
-                  className="flex items-center justify-center"
-                  size="icon"
-                  variant="ghost"
+                  className="gap-1 h-7 px-2 text-xs border border-border bg-muted/20"
+                  size="xs"
+                  variant="secondary"
                   role="combobox"
                   aria-expanded={open}
                >
@@ -49,9 +50,14 @@ export function PrioritySelector({ priority, onPriorityChange }: PrioritySelecto
                      const selectedItem = priorities.find((item) => item.id === value);
                      if (selectedItem) {
                         const Icon = selectedItem.icon;
-                        return <Icon className="text-muted-foreground size-4" />;
+                        return (
+                           <>
+                              <Icon className="text-muted-foreground size-4" />
+                              <span>{buttonText ?? selectedItem.name}</span>
+                           </>
+                        );
                      }
-                     return null;
+                     return <span>{buttonText ?? 'Priority'}</span>;
                   })()}
                </Button>
             </PopoverTrigger>

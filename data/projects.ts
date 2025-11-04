@@ -28,17 +28,30 @@ import {
 import { RemixiconComponentType } from '@remixicon/react';
 import { User, users } from './users';
 import { Priority, priorities } from './priorities';
+import { LabelInterface } from './labels';
 
 export interface Project {
    id: string;
    name: string;
+   summary?: string;
    status: Status;
    icon: LucideIcon | RemixiconComponentType;
    percentComplete: number;
    startDate: string;
+   targetDate?: string;
+   description?: string;
    lead: User;
    priority: Priority;
    health: Health;
+   archived?: boolean;
+   workspaceId?: string;
+   members?: User[];
+   labels?: LabelInterface[];
+   milestones?: {
+      id: string;
+      title: string;
+      dueDate?: string;
+   }[];
 }
 
 interface Health {
@@ -76,6 +89,45 @@ export const health: Health[] = [
 ];
 
 export const projects: Project[] = [
+   {
+      id: 'pp-1',
+      name: 'Linear.app – Auth redirect bug',
+      status: status[1],
+      icon: Workflow,
+      percentComplete: 20,
+      startDate: '2025-02-10',
+      lead: users[0],
+      priority: priorities[0],
+      health: health[3],
+      workspaceId: 'piedpiper',
+      description: 'Users intermittently redirected to login after refresh.'
+   },
+   {
+      id: 'pp-2',
+      name: 'Linear.app – Hydration mismatch investigation',
+      status: status[0],
+      icon: LayoutDashboard,
+      percentComplete: 40,
+      startDate: '2025-02-09',
+      lead: users[2],
+      priority: priorities[1],
+      health: health[2],
+      workspaceId: 'piedpiper',
+      description: 'Mismatch due to extension-injected attributes; add guards and docs.'
+   },
+   {
+      id: 'pp-3',
+      name: 'Linear.app – Projects board DnD polish',
+      status: status[2],
+      icon: Boxes,
+      percentComplete: 75,
+      startDate: '2025-02-08',
+      lead: users[1],
+      priority: priorities[1],
+      health: health[2],
+      workspaceId: 'piedpiper',
+      description: 'Refine card drag preview and drop targets.'
+   },
    {
       id: '1',
       name: 'Linear Clone - Core Features',
