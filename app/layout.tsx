@@ -25,6 +25,17 @@ export const metadata: Metadata = {
    },
    description:
       'A comprehensive project management solution built for Scaler Hackathon by Team Pied Piper. Built with Next.js and shadcn/ui, featuring modern UI/UX for tracking issues, projects and teams with real-time collaboration.',
+   icons: {
+      icon: [
+         { url: '/images/icon.ico', sizes: 'any' },
+         { url: '/images/icon.png', type: 'image/png' },
+         { url: '/images/icon.svg', type: 'image/svg+xml' },
+      ],
+      apple: [
+         { url: '/images/icon.png', sizes: '180x180', type: 'image/png' },
+      ],
+      shortcut: '/images/icon.ico',
+   },
    openGraph: {
       type: 'website',
       locale: 'en_US',

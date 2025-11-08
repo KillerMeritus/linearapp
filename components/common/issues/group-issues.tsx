@@ -32,7 +32,7 @@ export function GroupIssues({ status, issues, count }: GroupIssuesProps) {
          className={cn(
             'bg-conainer',
             isViewTypeGrid
-               ? 'overflow-hidden rounded-md h-full flex-shrink-0 w-[348px] flex flex-col'
+               ? 'overflow-hidden rounded-md h-full flex-shrink-0 w-[500px] flex flex-col'
                : ''
          )}
       >

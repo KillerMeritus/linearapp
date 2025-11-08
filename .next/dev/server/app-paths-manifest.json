@@ -1,4 +1,6 @@
 {
+  "/[orgId]/my-issues/page": "app/[orgId]/my-issues/page.js",
+  "/[orgId]/projects/page": "app/[orgId]/projects/page.js",
   "/[orgId]/team/[teamId]/all/page": "app/[orgId]/team/[teamId]/all/page.js",
   "/login/email/page": "app/login/email/page.js",
   "/login/page": "app/login/page.js",

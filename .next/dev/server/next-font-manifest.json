@@ -1,5 +1,11 @@
 {
   "app": {
+    "[project]/app/[orgId]/my-issues/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
+    "[project]/app/[orgId]/projects/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
     "[project]/app/[orgId]/team/[teamId]/all/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],

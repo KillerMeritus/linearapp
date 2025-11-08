@@ -200,6 +200,30 @@ const metadata = {
         default: 'Scaler Hackathon by Pied Piper'
     },
     description: 'A comprehensive project management solution built for Scaler Hackathon by Team Pied Piper. Built with Next.js and shadcn/ui, featuring modern UI/UX for tracking issues, projects and teams with real-time collaboration.',
+    icons: {
+        icon: [
+            {
+                url: '/images/icon.ico',
+                sizes: 'any'
+            },
+            {
+                url: '/images/icon.png',
+                type: 'image/png'
+            },
+            {
+                url: '/images/icon.svg',
+                type: 'image/svg+xml'
+            }
+        ],
+        apple: [
+            {
+                url: '/images/icon.png',
+                sizes: '180x180',
+                type: 'image/png'
+            }
+        ],
+        shortcut: '/images/icon.ico'
+    },
     openGraph: {
         type: 'website',
         locale: 'en_US',
@@ -255,12 +279,12 @@ function RootLayout({ children }) {
                     content: "width=device-width, initial-scale=1, maximum-scale=1"
                 }, void 0, false, {
                     fileName: "[project]/app/layout.tsx",
-                    lineNumber: 70,
+                    lineNumber: 81,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/layout.tsx",
-                lineNumber: 69,
+                lineNumber: 80,
                 columnNumber: 10
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$dom$40$19$2e$0$2e$0_react$40$19$2e$0$2e$0_$5f$react$40$19$2e$0$2e$0$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("body", {
@@ -274,29 +298,29 @@ function RootLayout({ children }) {
                             children,
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$dom$40$19$2e$0$2e$0_react$40$19$2e$0$2e$0_$5f$react$40$19$2e$0$2e$0$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$sonner$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Toaster"], {}, void 0, false, {
                                 fileName: "[project]/app/layout.tsx",
-                                lineNumber: 76,
+                                lineNumber: 87,
                                 columnNumber: 19
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/layout.tsx",
-                        lineNumber: 74,
+                        lineNumber: 85,
                         columnNumber: 16
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/layout.tsx",
-                    lineNumber: 73,
+                    lineNumber: 84,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/layout.tsx",
-                lineNumber: 72,
+                lineNumber: 83,
                 columnNumber: 10
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/layout.tsx",
-        lineNumber: 68,
+        lineNumber: 79,
         columnNumber: 7
     }, this);
 }
