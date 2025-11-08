@@ -1,9 +1,6 @@
 {
-  "/[orgId]/projects/page": "app/[orgId]/projects/page.js",
-  "/[orgId]/settings/page": "app/[orgId]/settings/page.js",
-  "/[orgId]/settings/preferences/page": "app/[orgId]/settings/preferences/page.js",
-  "/[orgId]/settings/profile/page": "app/[orgId]/settings/profile/page.js",
   "/[orgId]/team/[teamId]/all/page": "app/[orgId]/team/[teamId]/all/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
+  "/login/email/page": "app/login/email/page.js",
+  "/login/page": "app/login/page.js",
   "/page": "app/page.js"
 }

@@ -135,6 +135,42 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../../app/[orgId]/views/[viewId]/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/[orgId]/views/[viewId]">> = Specific
+  const handler = {} as typeof import("../../../app/[orgId]/views/[viewId]/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/[orgId]/views/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/[orgId]/views">> = Specific
+  const handler = {} as typeof import("../../../app/[orgId]/views/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/login/email/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/login/email">> = Specific
+  const handler = {} as typeof import("../../../app/login/email/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/login/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/login">> = Specific
+  const handler = {} as typeof import("../../../app/login/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../app/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/">> = Specific
@@ -144,20 +180,20 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
-// Validate ../../../app/projects/page.tsx
+
+
+
+
+
+
+// Validate ../../../app/[orgId]/layout.tsx
 {
-  type __IsExpected<Specific extends AppPageConfig<"/projects">> = Specific
-  const handler = {} as typeof import("../../../app/projects/page.js")
+  type __IsExpected<Specific extends LayoutConfig<"/[orgId]">> = Specific
+  const handler = {} as typeof import("../../../app/[orgId]/layout.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
 }
-
-
-
-
-
-
 
 // Validate ../../../app/layout.tsx
 {
