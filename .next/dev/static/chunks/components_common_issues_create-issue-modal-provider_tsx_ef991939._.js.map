@@ -2,5 +2,5 @@
   "version": 3,
   "sources": [],
   "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/atharva/Desktop/end%20game/linearapp/components/common/issues/create-issue-modal-provider.tsx"],"sourcesContent":["'use client';\n\nimport { CreateNewIssue } from '@/components/layout/sidebar/create-new-issue';\n\nexport function CreateIssueModalProvider() {\n   return (\n      <div className=\"hidden\">\n         <CreateNewIssue />\n      </div>\n   );\n}\n"],"names":[],"mappings":";;;;;AAEA;AAFA;;;AAIO,SAAS;IACb,qBACG,2UAAC;QAAI,WAAU;kBACZ,cAAA,2UAAC,wLAAc;;;;;;;;;;AAGxB;KANgB"}}]
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/kunal/Downloads/parent/linearapp/components/common/issues/create-issue-modal-provider.tsx"],"sourcesContent":["'use client';\r\n\r\nimport { CreateNewIssue } from '@/components/layout/sidebar/create-new-issue';\r\n\r\nexport function CreateIssueModalProvider() {\r\n   return (\r\n      <div className=\"hidden\">\r\n         <CreateNewIssue />\r\n      </div>\r\n   );\r\n}\r\n"],"names":[],"mappings":";;;;;AAEA;AAFA;;;AAIO,SAAS;IACb,qBACG,ySAAC;QAAI,WAAU;kBACZ,cAAA,ySAAC,wLAAc;;;;;;;;;;AAGxB;KANgB"}}]
 }
