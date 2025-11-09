@@ -3,10 +3,12 @@ import { Inter } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
+// Inter Variable font matching Linear's exact font
 const inter = Inter({
    variable: '--font-inter',
    subsets: ['latin'],
    display: 'swap',
+   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
 const interDisplay = Inter({

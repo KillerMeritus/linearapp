@@ -1,6 +1,4 @@
 {
-  "/[orgId]/team/[teamId]/all/page": "app/[orgId]/team/[teamId]/all/page.js",
-  "/login/email/page": "app/login/email/page.js",
-  "/login/page": "app/login/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js"
 }
