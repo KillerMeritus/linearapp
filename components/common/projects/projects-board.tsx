@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useProjectsStore } from '@/store/projects-store';
 import { useProjectsFilterStore } from '@/store/projects-filter-store';
 import { useProjectsDisplayStore } from '@/store/projects-display-store';
@@ -11,6 +11,7 @@ export default function ProjectsBoard() {
    const { filters } = useProjectsFilterStore();
    const showClosed = useProjectsDisplayStore((s) => s.showClosed);
    const params = useParams<{ orgId?: string }>();
+   const router = useRouter();
    const orgId = params?.orgId ?? 'default';
    const projects = useProjectsStore((s) => s.projects);
 
@@ -49,6 +50,10 @@ export default function ProjectsBoard() {
       updateProject(projectId, { status: statusObj });
    };
 
+   const handleProjectClick = (projectId: string) => {
+      router.push(`/${orgId}/projects/${projectId}`);
+   };
+
    return (
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 px-4 py-3">
          {columns.map((col) => (
@@ -61,10 +66,16 @@ export default function ProjectsBoard() {
                </div>
                <div className="p-2 space-y-2 min-h-24">
                   {col.items.map((p) => (
-                     <div key={p.id} className="rounded-md border bg-card p-2" draggable onDragStart={(e) => {
-                        e.dataTransfer.setData('text/project-id', p.id);
-                        e.dataTransfer.effectAllowed = 'move';
-                     }}>
+                     <div
+                        key={p.id}
+                        className="rounded-md border bg-card p-2 cursor-pointer hover:bg-muted/50 transition-colors"
+                        draggable
+                        onDragStart={(e) => {
+                           e.dataTransfer.setData('text/project-id', p.id);
+                           e.dataTransfer.effectAllowed = 'move';
+                        }}
+                        onClick={() => handleProjectClick(p.id)}
+                     >
                         <div className="flex items-center gap-2">
                            <div className="inline-flex size-6 bg-muted/50 items-center justify-center rounded shrink-0">
                               <p.icon className="size-4" />

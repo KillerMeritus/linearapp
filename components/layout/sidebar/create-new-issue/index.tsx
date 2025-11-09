@@ -21,11 +21,17 @@ import { ProjectSelector } from './project-selector';
 import { LabelSelector } from './label-selector';
 import { ranks } from '@/data/issues';
 import { DialogTitle } from '@radix-ui/react-dialog';
+import { useProjectsStore } from '@/store/projects-store';
 
-export function CreateNewIssue() {
+interface CreateNewIssueProps {
+   projectId?: string;
+}
+
+export function CreateNewIssue({ projectId }: CreateNewIssueProps = {}) {
    const [createMore, setCreateMore] = useState<boolean>(false);
    const { isOpen, defaultStatus, openModal, closeModal } = useCreateIssueStore();
    const { addIssue, getAllIssues } = useIssuesStore();
+   const getProjectById = useProjectsStore((s) => s.getProjectById);
 
    const generateUniqueIdentifier = useCallback(() => {
       const identifiers = getAllIssues().map((issue) => issue.identifier);
@@ -42,6 +48,7 @@ export function CreateNewIssue() {
 
    const createDefaultData = useCallback(() => {
       const identifier = generateUniqueIdentifier();
+      const defaultProject = projectId ? getProjectById(projectId) : undefined;
       return {
          id: uuidv4(),
          identifier: `LNUI-${identifier}`,
@@ -53,17 +60,17 @@ export function CreateNewIssue() {
          labels: [],
          createdAt: new Date().toISOString(),
          cycleId: '',
-         project: undefined,
+         project: defaultProject,
          subissues: [],
          rank: ranks[ranks.length - 1],
       };
-   }, [defaultStatus, generateUniqueIdentifier]);
+   }, [defaultStatus, generateUniqueIdentifier, projectId, getProjectById]);
 
    const [addIssueForm, setAddIssueForm] = useState<Issue>(createDefaultData());
 
    useEffect(() => {
       setAddIssueForm(createDefaultData());
-   }, [createDefaultData]);
+   }, [createDefaultData, isOpen]);
 
    const createIssue = () => {
       if (!addIssueForm.title) {

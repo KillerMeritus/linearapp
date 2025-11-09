@@ -41,8 +41,8 @@ export default function EmailLoginPage() {
    // Show loading state while checking authentication
    if (authLoading) {
       return (
-         <div className="flex items-center justify-center min-h-screen">
-            <div className="text-muted-foreground">Loading...</div>
+         <div className="flex items-center justify-center min-h-screen" style={{ background: '#08090a' }}>
+            <div style={{ color: '#8a8f98' }}>Loading...</div>
          </div>
       );
    }
@@ -53,50 +53,138 @@ export default function EmailLoginPage() {
    }
 
    return (
-      <div className="flex min-h-screen items-center justify-center bg-background p-4">
+      <div 
+         className="flex min-h-screen items-center justify-center p-4"
+         style={{ background: '#08090a' }}
+      >
          <div className="w-full max-w-[440px] flex flex-col items-center">
             {/* Linear Logo */}
             <div className="mb-12">
-               <svg width="48" height="48" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true" className="text-foreground">
-                  <path d="M37.3833 39.6083C37.5686 39.7936 37.866 39.8049 38.0605 39.6291C38.3259 39.3892 38.5867 39.1414 38.8425 38.8856C47.0518 30.6763 47.0518 17.3663 38.8425 9.15699C30.6332 0.947669 17.3232 0.947669 9.11388 9.15699C8.85807 9.4128 8.61024 9.67357 8.37037 9.93897C8.19462 10.1334 8.20585 10.4309 8.39119 10.6162L37.3833 39.6083Z"></path>
-                  <path d="M34.6753 42.1232C34.951 41.9601 34.9928 41.5817 34.7663 41.3552L6.64432 13.2332C6.41779 13.0066 6.03942 13.0485 5.87624 13.3242C5.4889 13.9786 5.14011 14.6495 4.82985 15.3336C4.74507 15.5206 4.78727 15.74 4.93243 15.8851L32.1144 43.067C32.2595 43.2122 32.4789 43.2544 32.6659 43.1696C33.35 42.8594 34.0209 42.5106 34.6753 42.1232Z"></path>
-                  <path d="M28.2357 44.6093C28.6164 44.531 28.7471 44.0636 28.4722 43.7887L4.21072 19.5272C3.93591 19.2524 3.4685 19.3831 3.39015 19.7638C3.2071 20.6531 3.08205 21.552 3.01501 22.4544C3.00437 22.5976 3.05768 22.738 3.15924 22.8396L25.1599 44.8402C25.2615 44.9418 25.4018 44.9951 25.5451 44.9845C26.4475 44.9174 27.3464 44.7924 28.2357 44.6093Z"></path>
-                  <path d="M19.2493 44.5067C19.7204 44.6149 20.0112 44.0554 19.6694 43.7136L4.28592 28.3301C3.9441 27.9883 3.38454 28.2791 3.49282 28.7502C4.34654 32.4646 6.22023 35.9919 9.11388 38.8856C12.0075 41.7792 15.5349 43.6529 19.2493 44.5067Z"></path>
-               </svg>
+               <div 
+                  className="w-12 h-12 rounded-full flex items-center justify-center"
+                  style={{ background: '#ffffff' }}
+               >
+                  <svg 
+                     width="24" 
+                     height="24" 
+                     viewBox="0 0 24 24" 
+                     fill="none" 
+                     xmlns="http://www.w3.org/2000/svg"
+                     style={{ color: '#000000' }}
+                  >
+                     <path 
+                        d="M18.6917 19.8042C18.7843 19.8968 18.933 19.9025 19.0303 19.8146C19.163 19.6946 19.2934 19.5707 19.4213 19.4428C23.5259 15.3382 23.5259 8.68315 19.4213 4.57855C15.3166 0.47395 8.66158 0.47395 4.55694 4.57855C4.42907 4.70642 4.30512 4.83678 4.18518 4.96947C4.09731 5.06675 4.10298 5.21545 4.19558 5.30805L18.6917 19.8042Z" 
+                        fill="currentColor"
+                     />
+                     <path 
+                        d="M17.3377 21.0616C17.4755 20.9801 17.4964 20.7909 17.3832 20.6777L3.32216 6.61662C3.20895 6.50341 3.01975 6.52432 2.93812 6.66212C2.74445 6.9893 2.57006 7.32475 2.41493 7.6668C2.37254 7.7603 2.39364 7.87 2.46622 7.94258L16.0572 21.5335C16.1298 21.6061 16.2395 21.6272 16.333 21.5848C16.675 21.4297 17.0105 21.2553 17.3377 21.0616Z" 
+                        fill="currentColor"
+                     />
+                     <path 
+                        d="M14.1179 22.3047C14.3082 22.2655 14.3736 22.0318 14.2361 21.8943L2.10536 9.76358C1.96796 9.62618 1.73424 9.69158 1.69505 9.88192C1.60355 10.3266 1.54103 10.776 1.50751 11.2272C1.50219 11.2988 1.52884 11.369 1.57962 11.4198L12.58 22.4202C12.6308 22.471 12.701 22.4976 12.7726 22.4923C13.2238 22.4588 13.6732 22.3963 14.1179 22.3047Z" 
+                        fill="currentColor"
+                     />
+                     <path 
+                        d="M9.62466 22.2534C9.86022 22.3075 10.0056 22.0277 9.83472 21.8568L2.14296 14.1651C1.9721 13.9942 1.69227 14.1396 1.74641 14.3751C2.17327 16.2323 3.11012 17.9959 4.55694 19.4428C5.00377 20.8896 6.76737 21.8265 8.62466 22.2534Z" 
+                        fill="currentColor"
+                     />
+                  </svg>
+               </div>
             </div>
 
             {/* Heading */}
-            <h1 className="text-2xl font-semibold text-foreground mb-6">Log in to Linear</h1>
+            <h1 
+               className="mb-6 text-center"
+               style={{
+                  fontSize: '1.5rem',
+                  fontWeight: 600,
+                  color: '#f7f8f8',
+                  letterSpacing: '-0.011em',
+                  lineHeight: 1.4,
+               }}
+            >
+               Log in to Linear
+            </h1>
 
             {/* Login Form */}
             <form onSubmit={handleSubmit} className="w-full max-w-[288px] flex flex-col items-center space-y-3">
                <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full h-12 px-3 bg-secondary border border-border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full h-12 px-4 rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 transition-colors"
+                  style={{
+                     background: '#141516',
+                     border: '1px solid #23252a',
+                     color: '#f7f8f8',
+                     fontSize: '0.9375rem',
+                     letterSpacing: '-0.011em',
+                  }}
+                  onFocus={(e) => {
+                     e.currentTarget.style.borderColor = '#5e6ad2';
+                     e.currentTarget.style.background = '#1a1b1c';
+                  }}
+                  onBlur={(e) => {
+                     e.currentTarget.style.borderColor = '#23252a';
+                     e.currentTarget.style.background = '#141516';
+                  }}
                   autoFocus
                />
 
                <input
                   type="password"
-                  placeholder="Enter your password"
+                  placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full h-12 px-3 bg-secondary border border-border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full h-12 px-4 rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 transition-colors"
+                  style={{
+                     background: '#141516',
+                     border: '1px solid #23252a',
+                     color: '#f7f8f8',
+                     fontSize: '0.9375rem',
+                     letterSpacing: '-0.011em',
+                  }}
+                  onFocus={(e) => {
+                     e.currentTarget.style.borderColor = '#5e6ad2';
+                     e.currentTarget.style.background = '#1a1b1c';
+                  }}
+                  onBlur={(e) => {
+                     e.currentTarget.style.borderColor = '#23252a';
+                     e.currentTarget.style.background = '#141516';
+                  }}
                />
 
                {error && (
-                  <p className="text-sm text-destructive w-full">{error}</p>
+                  <p 
+                     className="text-sm w-full text-left"
+                     style={{ color: '#eb5757' }}
+                  >
+                     {error}
+                  </p>
                )}
 
                <button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-12 bg-[#6366F1] hover:bg-[#6366F1]/90 active:bg-[#6366F1]/95 text-white font-medium rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full h-12 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                     background: loading ? '#525cc0' : '#5e6ad2',
+                     color: '#ffffff',
+                     fontWeight: 510,
+                  }}
+                  onMouseEnter={(e) => {
+                     if (!loading) {
+                        e.currentTarget.style.background = '#525cc0';
+                     }
+                  }}
+                  onMouseLeave={(e) => {
+                     if (!loading) {
+                        e.currentTarget.style.background = '#5e6ad2';
+                     }
+                  }}
                >
                   {loading ? 'Signing in...' : 'Log in'}
                </button>
@@ -104,7 +192,17 @@ export default function EmailLoginPage() {
 
             {/* Back Link */}
             <div className="mt-8 text-center">
-               <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+               <Link 
+                  href="/login" 
+                  className="text-sm transition-colors"
+                  style={{ color: '#8a8f98' }}
+                  onMouseEnter={(e) => {
+                     e.currentTarget.style.color = '#f7f8f8';
+                  }}
+                  onMouseLeave={(e) => {
+                     e.currentTarget.style.color = '#8a8f98';
+                  }}
+               >
                   ← Back to login options
                </Link>
             </div>
