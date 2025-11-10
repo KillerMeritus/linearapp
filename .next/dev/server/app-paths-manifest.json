@@ -1,8 +1,1 @@
-{
-  "/[orgId]/projects/page": "app/[orgId]/projects/page.js",
-  "/[orgId]/team/[teamId]/all/page": "app/[orgId]/team/[teamId]/all/page.js",
-  "/login/email/page": "app/login/email/page.js",
-  "/login/page": "app/login/page.js",
-  "/page": "app/page.js",
-  "/signup/page": "app/signup/page.js"
-}
+{}

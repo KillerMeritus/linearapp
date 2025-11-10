@@ -185,7 +185,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(userData);
    };
 
-   const signOut = () => {
+   const signOut = async () => {
       localStorage.removeItem(STORAGE_KEY_SESSION);
       localStorage.removeItem(STORAGE_KEY_CURRENT_USER);
       setUser(null);

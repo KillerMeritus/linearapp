@@ -62,7 +62,7 @@ interface ViewsState {
    defaultViewByTeamId: Record<string, string>;
 
    applyConfig: (config: Partial<ViewsConfig>) => void;
-   saveView: (view: Omit<SavedView, 'id' | 'updatedAt'>) => string;
+   saveView: (view: Omit<SavedView, 'id' | 'updatedAt' | 'createdAt'>) => string;
    updateView: (id: string, patch: Partial<Omit<SavedView, 'id'>>) => void;
    deleteView: (id: string) => void;
    selectView: (id: string) => void;

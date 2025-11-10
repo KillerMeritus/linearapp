@@ -145,7 +145,13 @@ export class ProjectCoordinatorService {
    /**
     * Get project statistics
     */
-   static getProjectStatistics(projectId: string) {
+   static getProjectStatistics(projectId: string): {
+      total: number;
+      completed: number;
+      inProgress: number;
+      pending: number;
+      completionRate: number;
+   } {
       try {
          if (!projectId) {
             throw new Error('Project ID is required');
@@ -177,7 +183,13 @@ export class ProjectCoordinatorService {
    /**
     * Get overall project metrics
     */
-   static getOverallMetrics() {
+   static getOverallMetrics(): {
+      total: number;
+      completed: number;
+      active: number;
+      atRisk: number;
+      averageCompletion: number;
+   } {
       try {
          const total = projects.length;
          const completed = projects.filter((p) => p.status.id === 'completed').length;

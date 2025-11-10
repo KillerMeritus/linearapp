@@ -26,8 +26,6 @@ export interface KeyboardShortcuts {
    goToSettings: string; // 'g+s'
 }
 
-export type { KeyboardShortcuts };
-
 export interface DisplayPreferences {
    displayFullNames: boolean;
    usePointerCursors: boolean;

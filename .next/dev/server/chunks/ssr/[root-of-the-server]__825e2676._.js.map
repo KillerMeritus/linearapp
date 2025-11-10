@@ -2,5 +2,5 @@
   "version": 3,
   "sources": [],
   "sections": [
-    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/fajan/Downloads/linearapp/app/%5BorgId%5D/page.tsx"],"sourcesContent":["import { redirect } from 'next/navigation';\r\n\r\nexport default function OrgIdPage() {\r\n   redirect('piedpiper/team/CORE/all');\r\n}\r\n"],"names":[],"mappings":";;;;AAAA;AAAA;;AAEe,SAAS;IACrB,IAAA,6SAAQ,EAAC;AACZ"}}]
+    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/singh/Downloads/linearapp/app/%5BorgId%5D/page.tsx"],"sourcesContent":["import { redirect } from 'next/navigation';\r\n\r\nexport default function OrgIdPage() {\r\n   redirect('piedpiper/team/CORE/all');\r\n}\r\n"],"names":[],"mappings":";;;;AAAA;AAAA;;AAEe,SAAS;IACrB,IAAA,6SAAQ,EAAC;AACZ"}}]
 }

@@ -645,9 +645,8 @@ export default function ProjectDetailPage() {
                      )}
                   </div>
                </div>
-               )}
 
-               {activeTab === 'updates' && (
+            {activeTab === 'updates' && (
                   <ProjectUpdates project={project} />
                )}
 
@@ -1044,7 +1043,6 @@ export default function ProjectDetailPage() {
                      </div>
                   </div>
                </div>
-               </>
                )}
 
                {/* Right Sidebar for Updates and Issues tabs - Show Properties */}

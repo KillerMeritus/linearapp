@@ -1,7 +1,1 @@
-[00:00:02.679] Server  LOG      ✓ Ready in 1839ms
-[00:00:05.797] Server  LOG      ○ Compiling /[orgId]/projects ...
-[00:00:11.958] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:40.194] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:43.331] Server  LOG      ○ Compiling /[orgId]/team/[teamId]/all ...
-[00:01:03.941] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:14.435] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:02.650] Server  LOG      ✓ Ready in 1755ms
