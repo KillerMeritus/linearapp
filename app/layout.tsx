@@ -3,10 +3,12 @@ import { Inter } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
+// Inter Variable font matching Linear's exact font
 const inter = Inter({
    variable: '--font-inter',
    subsets: ['latin'],
    display: 'swap',
+   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
 const interDisplay = Inter({
@@ -25,6 +27,17 @@ export const metadata: Metadata = {
    },
    description:
       'A comprehensive project management solution built for Scaler Hackathon by Team Pied Piper. Built with Next.js and shadcn/ui, featuring modern UI/UX for tracking issues, projects and teams with real-time collaboration.',
+   icons: {
+      icon: [
+         { url: '/images/icon.ico', sizes: 'any' },
+         { url: '/images/icon.png', type: 'image/png' },
+         { url: '/images/icon.svg', type: 'image/svg+xml' },
+      ],
+      apple: [
+         { url: '/images/icon.png', sizes: '180x180', type: 'image/png' },
+      ],
+      shortcut: '/images/icon.ico',
+   },
    openGraph: {
       type: 'website',
       locale: 'en_US',
@@ -57,6 +70,7 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from '@/components/layout/theme-provider';
+import { AuthProvider } from '@/lib/auth-context';
 
 export default function RootLayout({
    children,
@@ -69,10 +83,12 @@ export default function RootLayout({
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
          </head>
          <body className={`${inter.variable} ${interDisplay.variable} antialiased bg-background`}>
-            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-               {children}
-               <Toaster />
-            </ThemeProvider>
+            <AuthProvider>
+               <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+                  {children}
+                  <Toaster />
+               </ThemeProvider>
+            </AuthProvider>
          </body>
       </html>
    );

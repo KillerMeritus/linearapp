@@ -31,7 +31,7 @@ function IssueDragPreview({ issue }: { issue: Issue }) {
             <StatusSelector status={issue.status} issueId={issue.id} />
          </div>
 
-         <h3 className="text-sm font-semibold mb-3 line-clamp-2">{issue.title}</h3>
+         <h3 className="text-sm font-semibold mb-3 line-clamp-3 leading-relaxed">{issue.title}</h3>
 
          <div className="flex flex-wrap gap-1.5 mb-3 min-h-[1.5rem]">
             <LabelBadge label={issue.labels} />
@@ -104,7 +104,7 @@ export function IssueGrid({ issue }: IssueGridProps) {
          <ContextMenuTrigger asChild>
             <motion.div
                ref={ref}
-               className="w-full p-3 bg-background rounded-md shadow-xs border border-border/50 cursor-default"
+               className="w-full p-4 bg-background rounded-md shadow-xs border border-border/50 cursor-default"
                layoutId={`issue-grid-${issue.identifier}`}
                style={{
                   opacity: isDragging ? 0.5 : 1,
@@ -120,7 +120,7 @@ export function IssueGrid({ issue }: IssueGridProps) {
                   </div>
                   <StatusSelector status={issue.status} issueId={issue.id} />
                </div>
-               <h3 className="text-sm font-semibold mb-3 line-clamp-2">{issue.title}</h3>
+               <h3 className="text-sm font-semibold mb-3 line-clamp-3 leading-relaxed">{issue.title}</h3>
                <div className="flex flex-wrap gap-1.5 mb-3 min-h-[1.5rem]">
                   <LabelBadge label={issue.labels} />
                   {issue.project && <ProjectBadge project={issue.project} />}

@@ -157,7 +157,13 @@ export class TaskManagerService {
    /**
     * Get task statistics
     */
-   static getTaskStatistics() {
+   static getTaskStatistics(): {
+      total: number;
+      completed: number;
+      inProgress: number;
+      todo: number;
+      completionRate: number;
+   } {
       try {
          const issues = useIssuesStore.getState().getAllIssues();
          const total = issues.length;

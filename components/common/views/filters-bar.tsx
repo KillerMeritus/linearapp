@@ -18,10 +18,12 @@ export function FiltersBar() {
    const config = useViewsStore((s) => s.currentConfig);
    const applyConfig = useViewsStore((s) => s.applyConfig);
 
-   const toggleMulti = (key: keyof typeof config.filters, id: string) => {
-      const set = new Set(config.filters[key] ?? []);
+   const toggleMulti = (key: 'status' | 'assignee' | 'priority' | 'labels' | 'project', id: string) => {
+      const currentValue = config.filters[key];
+      const arrayValue = Array.isArray(currentValue) ? currentValue : [];
+      const set = new Set(arrayValue);
       set.has(id) ? set.delete(id) : set.add(id);
-      applyConfig({ filters: { [key]: Array.from(set) } as any });
+      applyConfig({ filters: { [key]: Array.from(set) } });
    };
 
    return (
@@ -98,7 +100,7 @@ export function FiltersBar() {
                      <Calendar
                         mode="single"
                         selected={config.filters.date?.from ? new Date(config.filters.date.from) : undefined}
-                        onSelect={(d) => applyConfig({ filters: { date: { ...config.filters.date, from: d ? d.toISOString().slice(0, 10) : undefined } } })}
+                        onSelect={(d) => applyConfig({ filters: { date: { ...(config.filters.date || {}), from: d ? d.toISOString().slice(0, 10) : undefined } } })}
                      />
                   </div>
                   <div className="space-y-2">
@@ -106,7 +108,7 @@ export function FiltersBar() {
                      <Calendar
                         mode="single"
                         selected={config.filters.date?.to ? new Date(config.filters.date.to) : undefined}
-                        onSelect={(d) => applyConfig({ filters: { date: { ...config.filters.date, to: d ? d.toISOString().slice(0, 10) : undefined } } })}
+                        onSelect={(d) => applyConfig({ filters: { date: { ...(config.filters.date || {}), to: d ? d.toISOString().slice(0, 10) : undefined } } })}
                      />
                   </div>
                </div>

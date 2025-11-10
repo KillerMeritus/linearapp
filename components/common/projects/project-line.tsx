@@ -11,12 +11,15 @@ import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { useProjectsStore } from '@/store/projects-store';
 import { useProjectsDisplayStore } from '@/store/projects-display-store';
+import { useParams, useRouter } from 'next/navigation';
 
 interface ProjectLineProps {
    project: Project;
 }
 
 export default function ProjectLine({ project }: ProjectLineProps) {
+   const params = useParams<{ orgId?: string }>();
+   const router = useRouter();
    const renameProject = useProjectsStore((s) => s.renameProject);
    const archiveProject = useProjectsStore((s) => s.archiveProject);
    const unarchiveProject = useProjectsStore((s) => s.unarchiveProject);
@@ -32,15 +35,25 @@ export default function ProjectLine({ project }: ProjectLineProps) {
       }
       setEditing(false);
    };
+
+   const handleProjectClick = () => {
+      if (!editing) {
+         router.push(`/${params?.orgId || 'piedpiper'}/projects/${project.id}`);
+      }
+   };
+
    return (
-      <div className="w-full flex items-center py-3 px-6 border-b hover:bg-sidebar/50 border-muted-foreground/5 text-sm">
+      <div 
+         className="w-full flex items-center py-3 px-6 border-b hover:bg-sidebar/50 border-muted-foreground/5 text-sm cursor-pointer"
+         onClick={handleProjectClick}
+      >
          <div className="w-[60%] sm:w-[70%] xl:w-[46%] flex items-center gap-2">
             <div className="relative">
                <div className="inline-flex size-6 bg-muted/50 items-center justify-center rounded shrink-0">
                   <project.icon className="size-4" />
                </div>
             </div>
-            <div className="flex flex-col items-start overflow-hidden">
+            <div className="flex flex-col items-start overflow-hidden" onClick={(e) => e.stopPropagation()}>
               {editing ? (
                  <div className="flex items-center gap-2">
                     <Input value={name} onChange={(e) => setName(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') onRename(); if (e.key === 'Escape') setEditing(false); }} size={8 as any} className="h-7 py-0" />
@@ -80,7 +93,7 @@ export default function ProjectLine({ project }: ProjectLineProps) {
              <StatusWithPercent status={project.status} percentComplete={project.percentComplete} />
           </div>
         )}
-         <div className="ml-auto pl-2">
+         <div className="ml-auto pl-2" onClick={(e) => e.stopPropagation()}>
             <DropdownMenu>
                <DropdownMenuTrigger asChild>
                   <Button size="icon" variant="ghost" className="h-6 w-6">

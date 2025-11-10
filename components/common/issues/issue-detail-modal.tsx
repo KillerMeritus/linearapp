@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
@@ -121,143 +121,188 @@ export function IssueDetailModal({ issue, open, onOpenChange }: IssueDetailModal
 
    return (
       <Dialog open={open} onOpenChange={onOpenChange}>
-         <DialogContent className="max-w-5xl h-[90vh] p-0 gap-0 glass-effect">
+         <DialogContent className="!w-[98vw] !max-w-[98vw] sm:!max-w-[98vw] !h-[98vh] !max-h-[98vh] p-0 gap-0 glass-effect [&>button]:hidden !translate-x-[-50%] !translate-y-[-50%] !rounded-lg">
             {/* Header */}
-            <DialogHeader className="px-6 py-4 border-b border-border flex flex-row items-center justify-between">
-               <div className="flex items-center gap-3">
-                  <span className="text-sm font-mono text-muted-foreground">{issue.identifier}</span>
-                  <Button variant="ghost" size="icon" className="h-8 w-8">
-                     <LinkIcon className="h-4 w-4" />
+            <DialogHeader className="px-12 py-6 border-b border-border flex flex-row items-center justify-between">
+               <DialogTitle className="sr-only">{issue.title}</DialogTitle>
+               <div className="flex items-center gap-4">
+                  <span className="text-base font-mono text-muted-foreground">{issue.identifier}</span>
+                  <Button variant="ghost" size="icon" className="h-9 w-9">
+                     <LinkIcon className="h-5 w-5" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="h-8 w-8">
-                     <MoreHorizontal className="h-4 w-4" />
+                  <Button variant="ghost" size="icon" className="h-9 w-9">
+                     <MoreHorizontal className="h-5 w-5" />
                   </Button>
                </div>
-               <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => onOpenChange(false)}>
-                  <X className="h-4 w-4" />
+               <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-9 w-9"
+                  onClick={() => onOpenChange(false)}
+               >
+                  <X className="h-5 w-5" />
                </Button>
             </DialogHeader>
 
             <div className="flex flex-1 overflow-hidden">
-               {/* Main Content */}
-               <div className="flex-1 overflow-y-auto px-6 py-6">
-                  {/* Title */}
-                  <h1 className="text-2xl font-semibold mb-6">{issue.title}</h1>
-
-                  {/* Description */}
-                  <div className="mb-8">
-                     <h3 className="text-sm font-semibold mb-2 text-muted-foreground">Description</h3>
-                     <p className="text-sm leading-relaxed">{issue.description}</p>
-                  </div>
-
-                  <Separator className="my-6" />
-
-                  {/* Comments Section */}
-                  <div className="mb-6">
-                     <h3 className="text-sm font-semibold mb-4 flex items-center gap-2">
-                        <MessageSquare className="h-4 w-4" />
-                        Comments ({comments.length})
-                     </h3>
-
-                     <div className="space-y-4 mb-4">
-                        {comments.map((c) => (
-                           <div key={c.id} className="flex gap-3">
-                              <Avatar className="h-8 w-8">
-                                 <AvatarImage src={c.author.avatar} />
-                                 <AvatarFallback>{c.author.name.charAt(0)}</AvatarFallback>
-                              </Avatar>
-                              <div className="flex-1">
-                                 <div className="flex items-center gap-2 mb-1">
-                                    <span className="text-sm font-medium">{c.author.name}</span>
-                                    <span className="text-xs text-muted-foreground">
-                                       {formatDistanceToNow(new Date(c.createdAt), { addSuffix: true })}
-                                    </span>
-                                 </div>
-                                 <p className="text-sm text-foreground/90">{c.content}</p>
-                              </div>
-                           </div>
-                        ))}
-                     </div>
-
-                     {/* Add Comment */}
-                     <div className="flex gap-3">
-                        <Avatar className="h-8 w-8">
-                           <AvatarImage src="https://i.pravatar.cc/150?img=1" />
-                           <AvatarFallback>RH</AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1">
-                           <Textarea
-                              placeholder="Add a comment..."
-                              value={comment}
-                              onChange={(e) => setComment(e.target.value)}
-                              className="min-h-[80px] mb-2"
-                              onKeyDown={(e) => {
-                                 if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-                                    handleAddComment();
-                                 }
-                              }}
-                           />
-                           <Button onClick={handleAddComment} size="sm">
-                              Comment
-                           </Button>
+               {/* Main Content - Scrollable */}
+               <div 
+                  className="flex-1 overflow-y-auto"
+                  data-restore-scroll-view="issue-view"
+                  data-view-id="issue-view"
+                  tabIndex={0}
+                  style={{ scrollbarGutter: 'stable' }}
+               >
+                  {/* Centered Content Container */}
+                  <div className="max-w-4xl mx-auto px-12 py-10">
+                     {/* Title - Editable */}
+                     <div className="mb-8">
+                        <div
+                           contentEditable={true}
+                           spellCheck={true}
+                           role="textbox"
+                           aria-readonly="false"
+                           aria-multiline="false"
+                           aria-label="Issue title"
+                           translate="no"
+                           className="text-4xl font-semibold text-center outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-md px-2 py-1 -mx-2 -my-1 min-h-[60px]"
+                           suppressContentEditableWarning={true}
+                           onBlur={(e) => {
+                              // Handle title update here if needed
+                           }}
+                        >
+                           {issue.title}
                         </div>
                      </div>
-                  </div>
 
-                  <Separator className="my-6" />
+                     {/* Description */}
+                     <div className="mb-12">
+                        <div
+                           contentEditable={true}
+                           spellCheck={true}
+                           role="textbox"
+                           aria-readonly="false"
+                           aria-multiline="true"
+                           aria-label="Issue description"
+                           className="text-lg leading-relaxed text-foreground/90 text-center whitespace-pre-wrap break-words outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-md px-2 py-1 -mx-2 -my-1 min-h-[100px]"
+                           suppressContentEditableWarning={true}
+                           onBlur={(e) => {
+                              // Handle description update here if needed
+                           }}
+                        >
+                           {issue.description || 'Add a description...'}
+                        </div>
+                     </div>
 
-                  {/* Activity Feed */}
-                  <div>
-                     <h3 className="text-sm font-semibold mb-4 flex items-center gap-2">
-                        <Clock className="h-4 w-4" />
-                        Activity
-                     </h3>
+                     <Separator className="my-10" />
 
-                     <div className="space-y-3">
-                        {activities.map((activity) => (
-                           <div key={activity.id} className="flex gap-3 text-sm">
-                              <div className="flex-shrink-0 w-1 bg-border rounded-full" />
-                              <div className="flex-1 pb-3">
-                                 {activity.type === 'status_change' && (
-                                    <p className="text-muted-foreground">
-                                       <span className="font-medium text-foreground">{activity.user}</span> changed
-                                       status from <Badge variant="outline">{activity.from}</Badge> to{' '}
-                                       <Badge variant="outline">{activity.to}</Badge>
-                                    </p>
-                                 )}
-                                 {activity.type === 'assignment' && (
-                                    <p className="text-muted-foreground">
-                                       <span className="font-medium text-foreground">{activity.user}</span> assigned
-                                       to <span className="font-medium text-foreground">{activity.assignee}</span>
-                                    </p>
-                                 )}
-                                 {activity.type === 'created' && (
-                                    <p className="text-muted-foreground">
-                                       <span className="font-medium text-foreground">{activity.user}</span> created
-                                       this issue
-                                    </p>
-                                 )}
-                                 <span className="text-xs text-muted-foreground">
-                                    {formatDistanceToNow(new Date(activity.timestamp), { addSuffix: true })}
-                                 </span>
+                     {/* Comments Section */}
+                     <div className="mb-10">
+                        <h3 className="text-lg font-semibold mb-6 flex items-center gap-3">
+                           <MessageSquare className="h-6 w-6" />
+                           Comments ({comments.length})
+                        </h3>
+
+                        <div className="space-y-6 mb-8">
+                           {comments.map((c) => (
+                              <div key={c.id} className="flex gap-5">
+                                 <Avatar className="h-12 w-12">
+                                    <AvatarImage src={c.author.avatar} />
+                                    <AvatarFallback>{c.author.name.charAt(0)}</AvatarFallback>
+                                 </Avatar>
+                                 <div className="flex-1">
+                                    <div className="flex items-center gap-3 mb-3">
+                                       <span className="text-lg font-medium">{c.author.name}</span>
+                                       <span className="text-base text-muted-foreground">
+                                          {formatDistanceToNow(new Date(c.createdAt), { addSuffix: true })}
+                                       </span>
+                                    </div>
+                                    <p className="text-lg text-foreground/90 leading-relaxed">{c.content}</p>
+                                 </div>
                               </div>
+                           ))}
+                        </div>
+
+                        {/* Add Comment */}
+                        <div className="flex gap-5">
+                           <Avatar className="h-12 w-12">
+                              <AvatarImage src="https://i.pravatar.cc/150?img=1" />
+                              <AvatarFallback>RH</AvatarFallback>
+                           </Avatar>
+                           <div className="flex-1">
+                              <Textarea
+                                 placeholder="Add a comment..."
+                                 value={comment}
+                                 onChange={(e) => setComment(e.target.value)}
+                                 className="min-h-[120px] mb-4 text-lg"
+                                 onKeyDown={(e) => {
+                                    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+                                       handleAddComment();
+                                    }
+                                 }}
+                              />
+                              <Button onClick={handleAddComment} size="lg">
+                                 Comment
+                              </Button>
                            </div>
-                        ))}
+                        </div>
+                     </div>
+
+                     <Separator className="my-10" />
+
+                     {/* Activity Feed */}
+                     <div>
+                        <h3 className="text-lg font-semibold mb-6 flex items-center gap-3">
+                           <Clock className="h-6 w-6" />
+                           Activity
+                        </h3>
+
+                        <div className="space-y-5">
+                           {activities.map((activity) => (
+                              <div key={activity.id} className="flex gap-5 text-lg">
+                                 <div className="flex-shrink-0 w-1 bg-border rounded-full" />
+                                 <div className="flex-1 pb-5">
+                                    {activity.type === 'status_change' && (
+                                       <p className="text-muted-foreground">
+                                          <span className="font-medium text-foreground">{activity.user}</span> changed
+                                          status from <Badge variant="outline">{activity.from}</Badge> to{' '}
+                                          <Badge variant="outline">{activity.to}</Badge>
+                                       </p>
+                                    )}
+                                    {activity.type === 'assignment' && (
+                                       <p className="text-muted-foreground">
+                                          <span className="font-medium text-foreground">{activity.user}</span> assigned
+                                          to <span className="font-medium text-foreground">{activity.assignee}</span>
+                                       </p>
+                                    )}
+                                    {activity.type === 'created' && (
+                                       <p className="text-muted-foreground">
+                                          <span className="font-medium text-foreground">{activity.user}</span> created
+                                          this issue
+                                       </p>
+                                    )}
+                                    <span className="text-xs text-muted-foreground">
+                                       {formatDistanceToNow(new Date(activity.timestamp), { addSuffix: true })}
+                                    </span>
+                                 </div>
+                              </div>
+                           ))}
+                        </div>
                      </div>
                   </div>
                </div>
 
                {/* Right Sidebar - Properties */}
-               <div className="w-80 border-l border-border overflow-y-auto px-6 py-6 bg-muted/20">
-                  <h3 className="text-xs font-semibold uppercase text-muted-foreground mb-4 tracking-wider">
+               <div className="w-[450px] border-l border-border overflow-y-auto px-10 py-10 bg-muted/20">
+                  <h3 className="text-xs font-semibold uppercase text-muted-foreground mb-8 tracking-wider">
                      Properties
                   </h3>
 
-                  <div className="space-y-5">
+                  <div className="space-y-8">
                      {/* Status */}
                      <div>
-                        <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-1.5">
-                           <AlertCircle className="h-3 w-3" />
+                        <label className="text-base text-muted-foreground mb-4 block flex items-center gap-2">
+                           <AlertCircle className="h-5 w-5" />
                            Status
                         </label>
                         <Select defaultValue={issue.status.name}>
@@ -287,8 +332,8 @@ export function IssueDetailModal({ issue, open, onOpenChange }: IssueDetailModal
 
                      {/* Priority */}
                      <div>
-                        <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-1.5">
-                           <AlertCircle className="h-3 w-3" />
+                        <label className="text-base text-muted-foreground mb-4 block flex items-center gap-2">
+                           <AlertCircle className="h-5 w-5" />
                            Priority
                         </label>
                         <Select defaultValue={issue.priority.name}>
@@ -318,20 +363,20 @@ export function IssueDetailModal({ issue, open, onOpenChange }: IssueDetailModal
 
                      {/* Assignee */}
                      <div>
-                        <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-1.5">
-                           <User className="h-3 w-3" />
+                        <label className="text-base text-muted-foreground mb-4 block flex items-center gap-2">
+                           <User className="h-5 w-5" />
                            Assignee
                         </label>
                         {issue.assignee ? (
-                           <div className="flex items-center gap-2 p-2 rounded-md border border-border">
-                              <Avatar className="h-6 w-6">
+                           <div className="flex items-center gap-4 p-4 rounded-md border border-border">
+                              <Avatar className="h-10 w-10">
                                  <AvatarImage src={issue.assignee.avatarUrl} />
                                  <AvatarFallback>{issue.assignee.name.charAt(0)}</AvatarFallback>
                               </Avatar>
-                              <span className="text-sm">{issue.assignee.name}</span>
+                              <span className="text-lg">{issue.assignee.name}</span>
                            </div>
                         ) : (
-                           <Button variant="outline" className="w-full justify-start text-muted-foreground">
+                           <Button variant="outline" className="w-full justify-start text-muted-foreground h-12 text-base">
                               No assignee
                            </Button>
                         )}
@@ -339,8 +384,8 @@ export function IssueDetailModal({ issue, open, onOpenChange }: IssueDetailModal
 
                      {/* Labels */}
                      <div>
-                        <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-1.5">
-                           <Tag className="h-3 w-3" />
+                        <label className="text-base text-muted-foreground mb-4 block flex items-center gap-2">
+                           <Tag className="h-5 w-5" />
                            Labels
                         </label>
                         <div className="flex flex-wrap gap-1.5">
@@ -368,12 +413,12 @@ export function IssueDetailModal({ issue, open, onOpenChange }: IssueDetailModal
                      {/* Project */}
                      {issue.project && (
                         <div>
-                           <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-1.5">
-                              <Folder className="h-3 w-3" />
+                           <label className="text-base text-muted-foreground mb-4 block flex items-center gap-2">
+                              <Folder className="h-5 w-5" />
                               Project
                            </label>
-                           <div className="p-2 rounded-md border border-border">
-                              <span className="text-sm">{issue.project.name}</span>
+                           <div className="p-4 rounded-md border border-border">
+                              <span className="text-lg">{issue.project.name}</span>
                            </div>
                         </div>
                      )}
@@ -381,12 +426,12 @@ export function IssueDetailModal({ issue, open, onOpenChange }: IssueDetailModal
                      {/* Due Date */}
                      {issue.dueDate && (
                         <div>
-                           <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-1.5">
-                              <Calendar className="h-3 w-3" />
+                           <label className="text-base text-muted-foreground mb-4 block flex items-center gap-2">
+                              <Calendar className="h-5 w-5" />
                               Due Date
                            </label>
-                           <div className="p-2 rounded-md border border-border">
-                              <span className="text-sm">
+                           <div className="p-4 rounded-md border border-border">
+                              <span className="text-lg">
                                  {new Date(issue.dueDate).toLocaleDateString('en-US', {
                                     month: 'short',
                                     day: 'numeric',
@@ -397,10 +442,10 @@ export function IssueDetailModal({ issue, open, onOpenChange }: IssueDetailModal
                         </div>
                      )}
 
-                     <Separator />
+                     <Separator className="my-8" />
 
                      {/* Metadata */}
-                     <div className="space-y-2 text-xs text-muted-foreground">
+                     <div className="space-y-4 text-base text-muted-foreground">
                         <div>
                            Created {formatDistanceToNow(new Date(issue.createdAt), { addSuffix: true })}
                         </div>

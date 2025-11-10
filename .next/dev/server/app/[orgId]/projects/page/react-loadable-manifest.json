@@ -1,1 +1,16 @@
-{}
+{
+  "[project]/components/common/command-palette.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/components/common/command-palette.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/_adbcbc3a._.js",
+      "static/chunks/components_common_command-palette_tsx_5f722a58._.js"
+    ]
+  },
+  "[project]/components/common/issues/create-issue-modal-provider.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/components/common/issues/create-issue-modal-provider.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/components_common_issues_create-issue-modal-provider_tsx_ef991939._.js",
+      "static/chunks/components_common_issues_create-issue-modal-provider_tsx_5f722a58._.js"
+    ]
+  }
+}

@@ -2,7 +2,16 @@
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
-import { Command } from 'cmdk';
+import {
+   Command,
+   CommandDialog,
+   CommandInput,
+   CommandList,
+   CommandEmpty,
+   CommandGroup,
+   CommandItem,
+   CommandSeparator,
+} from '@/components/ui/command';
 import {
    Search,
    Inbox,
@@ -16,14 +25,111 @@ import {
    Pause,
    PlayCircle,
    XCircle,
+   FileText,
+   Hash,
 } from 'lucide-react';
 import { useCreateIssueStore } from '@/store/create-issue-store';
+import { useIssuesStore } from '@/store/issues-store';
+import { useProjectsStore } from '@/store/projects-store';
+import type { Issue } from '@/data/issues';
+import type { Project } from '@/data/projects';
+
+function DynamicSearchResults({
+   searchIssues,
+   allProjects,
+   router,
+   runCommand,
+   searchValue,
+}: {
+   searchIssues: (query: string) => Issue[];
+   allProjects: Project[];
+   router: ReturnType<typeof useRouter>;
+   runCommand: (command: () => void) => void;
+   searchValue: string;
+}) {
+
+   if (!searchValue || searchValue.trim() === '') {
+      return null;
+   }
+
+   const filteredIssues = searchIssues(searchValue);
+   const filteredProjects = allProjects.filter(
+      (project) =>
+         project.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+         project.description?.toLowerCase().includes(searchValue.toLowerCase())
+   );
+
+   if (filteredIssues.length === 0 && filteredProjects.length === 0) {
+      return null;
+   }
+
+   return (
+      <>
+         {filteredIssues.length > 0 && (
+            <>
+               <CommandSeparator />
+               <CommandGroup heading="Issues">
+                  {filteredIssues.slice(0, 10).map((issue) => (
+                     <CommandItem
+                        key={issue.id}
+                        value={`${issue.identifier} ${issue.title}`}
+                        keywords={[issue.title, issue.identifier, issue.description]}
+                        onSelect={() =>
+                           runCommand(() => {
+                              router.push(`/piedpiper/team/CORE/all?issue=${issue.id}`);
+                           })
+                        }
+                     >
+                        <Hash className="h-4 w-4" style={{ color: '#8a8f98' }} />
+                        <span className="flex-1">
+                           <span className="font-medium" style={{ color: '#f7f8f8' }}>
+                              {issue.identifier}
+                           </span>
+                           <span className="ml-2" style={{ color: '#8a8f98' }}>
+                              {issue.title}
+                           </span>
+                        </span>
+                     </CommandItem>
+                  ))}
+               </CommandGroup>
+            </>
+         )}
+
+         {filteredProjects.length > 0 && (
+            <>
+               <CommandSeparator />
+               <CommandGroup heading="Projects">
+                  {filteredProjects.slice(0, 10).map((project) => (
+                     <CommandItem
+                        key={project.id}
+                        value={project.name}
+                        keywords={[project.name, project.description || '']}
+                        onSelect={() =>
+                           runCommand(() => {
+                              router.push(`/piedpiper/projects/${project.id}`);
+                           })
+                        }
+                     >
+                        <Folders className="h-4 w-4" style={{ color: '#8a8f98' }} />
+                        <span className="font-medium" style={{ color: '#f7f8f8' }}>
+                           {project.name}
+                        </span>
+                     </CommandItem>
+                  ))}
+               </CommandGroup>
+            </>
+         )}
+      </>
+   );
+}
 
 export function CommandPalette() {
    const [open, setOpen] = React.useState(false);
    const [search, setSearch] = React.useState('');
    const router = useRouter();
    const { openModal } = useCreateIssueStore();
+   const { searchIssues } = useIssuesStore();
+   const { getAllProjects } = useProjectsStore();
 
    // Keyboard shortcut handler
    React.useEffect(() => {
@@ -61,152 +167,164 @@ export function CommandPalette() {
 
    const runCommand = React.useCallback((command: () => void) => {
       setOpen(false);
+      setSearch('');
       command();
    }, []);
 
+   // Get all projects for search
+   const allProjects = React.useMemo(() => getAllProjects(), [getAllProjects]);
+
    return (
-      <Command.Dialog
+      <CommandDialog
          open={open}
-         onOpenChange={setOpen}
-         className="fixed top-[20%] left-1/2 -translate-x-1/2 w-full max-w-2xl rounded-lg border border-border bg-popover shadow-linear-lg z-50"
-         label="Command Menu"
+         onOpenChange={(isOpen) => {
+            setOpen(isOpen);
+            if (!isOpen) {
+               setSearch('');
+            }
+         }}
+         title="Command Menu"
       >
-         <div className="glass-effect rounded-lg overflow-hidden">
-            <div className="flex items-center border-b border-border px-3">
-               <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-               <Command.Input
-                  value={search}
-                  onValueChange={setSearch}
-                  placeholder="Search for actions, issues, projects..."
-                  className="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
-               />
-            </div>
-            <Command.List className="max-h-[400px] overflow-y-auto p-2">
-               <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
-                  No results found.
-               </Command.Empty>
+         <Command shouldFilter={true} filter={(value, searchTerm) => {
+            if (!searchTerm) return 1;
+            const searchLower = searchTerm.toLowerCase();
+            const valueLower = value.toLowerCase();
+            if (valueLower.includes(searchLower)) return 1;
+            return 0;
+         }}>
+            <CommandInput 
+               value={search}
+               onValueChange={setSearch}
+               placeholder="Search for actions, issues, projects..." 
+            />
+            <CommandList>
+               <CommandEmpty>No results found.</CommandEmpty>
 
-               {!search && (
-                  <>
-                     <Command.Group heading="Actions" className="text-xs font-semibold text-muted-foreground px-2 py-1.5">
-                        <Command.Item
-                           onSelect={() =>
-                              runCommand(() => {
-                                 openModal();
-                              })
-                           }
-                           className="flex items-center gap-2 px-2 py-2 text-sm rounded cursor-pointer hover:bg-accent aria-selected:bg-accent outline-none"
-                        >
-                           <Plus className="h-4 w-4" />
-                           <span>Create new issue</span>
-                           <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                              C
-                           </kbd>
-                        </Command.Item>
-                     </Command.Group>
+               <CommandGroup heading="Actions">
+                  <CommandItem
+                     value="create new issue"
+                     keywords={['create', 'new', 'issue', 'add']}
+                     onSelect={() =>
+                        runCommand(() => {
+                           openModal();
+                        })
+                     }
+                  >
+                     <Plus className="h-4 w-4" />
+                     <span>Create new issue</span>
+                     <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                        C
+                     </kbd>
+                  </CommandItem>
+               </CommandGroup>
 
-                     <Command.Separator className="h-px bg-border my-1" />
+               <CommandSeparator />
 
-                     <Command.Group heading="Navigation" className="text-xs font-semibold text-muted-foreground px-2 py-1.5">
-                        <Command.Item
-                           onSelect={() => runCommand(() => router.push('/piedpiper/inbox'))}
-                           className="flex items-center gap-2 px-2 py-2 text-sm rounded cursor-pointer hover:bg-accent aria-selected:bg-accent outline-none"
-                        >
-                           <Inbox className="h-4 w-4" />
-                           <span>Inbox</span>
-                           <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                              G
-                           </kbd>
-                           <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                              I
-                           </kbd>
-                        </Command.Item>
-                        <Command.Item
-                           onSelect={() => runCommand(() => router.push('/piedpiper/teams'))}
-                           className="flex items-center gap-2 px-2 py-2 text-sm rounded cursor-pointer hover:bg-accent aria-selected:bg-accent outline-none"
-                        >
-                           <Users className="h-4 w-4" />
-                           <span>Teams</span>
-                           <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                              G
-                           </kbd>
-                           <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                              T
-                           </kbd>
-                        </Command.Item>
-                        <Command.Item
-                           onSelect={() => runCommand(() => router.push('/piedpiper/projects'))}
-                           className="flex items-center gap-2 px-2 py-2 text-sm rounded cursor-pointer hover:bg-accent aria-selected:bg-accent outline-none"
-                        >
-                           <Folders className="h-4 w-4" />
-                           <span>Projects</span>
-                           <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                              G
-                           </kbd>
-                           <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                              P
-                           </kbd>
-                        </Command.Item>
-                        <Command.Item
-                           onSelect={() => runCommand(() => router.push('/piedpiper/members'))}
-                           className="flex items-center gap-2 px-2 py-2 text-sm rounded cursor-pointer hover:bg-accent aria-selected:bg-accent outline-none"
-                        >
-                           <Users className="h-4 w-4" />
-                           <span>Members</span>
-                           <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                              G
-                           </kbd>
-                           <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                              M
-                           </kbd>
-                        </Command.Item>
-                        <Command.Item
-                           onSelect={() => runCommand(() => router.push('/piedpiper/settings'))}
-                           className="flex items-center gap-2 px-2 py-2 text-sm rounded cursor-pointer hover:bg-accent aria-selected:bg-accent outline-none"
-                        >
-                           <Settings className="h-4 w-4" />
-                           <span>Settings</span>
-                           <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                              G
-                           </kbd>
-                           <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                              S
-                           </kbd>
-                        </Command.Item>
-                     </Command.Group>
+               <CommandGroup heading="Navigation">
+                  <CommandItem
+                     value="inbox"
+                     keywords={['inbox', 'notifications']}
+                     onSelect={() => runCommand(() => router.push('/piedpiper/inbox'))}
+                  >
+                     <Inbox className="h-4 w-4" />
+                     <span>Inbox</span>
+                     <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                        G
+                     </kbd>
+                     <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                        I
+                     </kbd>
+                  </CommandItem>
+                  <CommandItem
+                     value="teams"
+                     keywords={['teams', 'team']}
+                     onSelect={() => runCommand(() => router.push('/piedpiper/teams'))}
+                  >
+                     <Users className="h-4 w-4" />
+                     <span>Teams</span>
+                     <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                        G
+                     </kbd>
+                     <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                        T
+                     </kbd>
+                  </CommandItem>
+                  <CommandItem
+                     value="projects"
+                     keywords={['projects', 'project']}
+                     onSelect={() => runCommand(() => router.push('/piedpiper/projects'))}
+                  >
+                     <Folders className="h-4 w-4" />
+                     <span>Projects</span>
+                     <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                        G
+                     </kbd>
+                     <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                        P
+                     </kbd>
+                  </CommandItem>
+                  <CommandItem
+                     value="members"
+                     keywords={['members', 'member', 'users', 'user']}
+                     onSelect={() => runCommand(() => router.push('/piedpiper/members'))}
+                  >
+                     <Users className="h-4 w-4" />
+                     <span>Members</span>
+                     <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                        G
+                     </kbd>
+                     <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                        M
+                     </kbd>
+                  </CommandItem>
+                  <CommandItem
+                     value="settings"
+                     keywords={['settings', 'setting', 'preferences']}
+                     onSelect={() => runCommand(() => router.push('/piedpiper/settings'))}
+                  >
+                     <Settings className="h-4 w-4" />
+                     <span>Settings</span>
+                     <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                        G
+                     </kbd>
+                     <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                        S
+                     </kbd>
+                  </CommandItem>
+               </CommandGroup>
 
-                     <Command.Separator className="h-px bg-border my-1" />
+               <CommandSeparator />
 
-                     <Command.Group heading="Issue Status" className="text-xs font-semibold text-muted-foreground px-2 py-1.5">
-                        <Command.Item className="flex items-center gap-2 px-2 py-2 text-sm rounded cursor-pointer hover:bg-accent aria-selected:bg-accent outline-none">
-                           <Circle className="h-4 w-4 text-muted-foreground" />
-                           <span>Set status: Backlog</span>
-                        </Command.Item>
-                        <Command.Item className="flex items-center gap-2 px-2 py-2 text-sm rounded cursor-pointer hover:bg-accent aria-selected:bg-accent outline-none">
-                           <Circle className="h-4 w-4 text-blue-500" />
-                           <span>Set status: Todo</span>
-                        </Command.Item>
-                        <Command.Item className="flex items-center gap-2 px-2 py-2 text-sm rounded cursor-pointer hover:bg-accent aria-selected:bg-accent outline-none">
-                           <PlayCircle className="h-4 w-4 text-yellow-500" />
-                           <span>Set status: In Progress</span>
-                        </Command.Item>
-                        <Command.Item className="flex items-center gap-2 px-2 py-2 text-sm rounded cursor-pointer hover:bg-accent aria-selected:bg-accent outline-none">
-                           <Clock className="h-4 w-4 text-purple-500" />
-                           <span>Set status: In Review</span>
-                        </Command.Item>
-                        <Command.Item className="flex items-center gap-2 px-2 py-2 text-sm rounded cursor-pointer hover:bg-accent aria-selected:bg-accent outline-none">
-                           <CheckCircle2 className="h-4 w-4 text-green-500" />
-                           <span>Set status: Done</span>
-                        </Command.Item>
-                        <Command.Item className="flex items-center gap-2 px-2 py-2 text-sm rounded cursor-pointer hover:bg-accent aria-selected:bg-accent outline-none">
-                           <XCircle className="h-4 w-4 text-gray-500" />
-                           <span>Set status: Canceled</span>
-                        </Command.Item>
-                     </Command.Group>
-                  </>
-               )}
-            </Command.List>
-         </div>
-      </Command.Dialog>
+               <CommandGroup heading="Issue Status">
+                  <CommandItem value="set status backlog" keywords={['backlog', 'status']}>
+                     <Circle className="h-4 w-4 text-muted-foreground" />
+                     <span>Set status: Backlog</span>
+                  </CommandItem>
+                  <CommandItem value="set status todo" keywords={['todo', 'status']}>
+                     <Circle className="h-4 w-4 text-blue-500" />
+                     <span>Set status: Todo</span>
+                  </CommandItem>
+                  <CommandItem value="set status in progress" keywords={['in progress', 'progress', 'status']}>
+                     <PlayCircle className="h-4 w-4 text-yellow-500" />
+                     <span>Set status: In Progress</span>
+                  </CommandItem>
+                  <CommandItem value="set status in review" keywords={['review', 'in review', 'status']}>
+                     <Clock className="h-4 w-4 text-purple-500" />
+                     <span>Set status: In Review</span>
+                  </CommandItem>
+                  <CommandItem value="set status done" keywords={['done', 'completed', 'status']}>
+                     <CheckCircle2 className="h-4 w-4 text-green-500" />
+                     <span>Set status: Done</span>
+                  </CommandItem>
+                  <CommandItem value="set status canceled" keywords={['canceled', 'cancelled', 'status']}>
+                     <XCircle className="h-4 w-4 text-gray-500" />
+                     <span>Set status: Canceled</span>
+                  </CommandItem>
+               </CommandGroup>
+
+               <DynamicSearchResults searchIssues={searchIssues} allProjects={allProjects} router={router} runCommand={runCommand} searchValue={search} />
+            </CommandList>
+         </Command>
+      </CommandDialog>
    );
 }

@@ -21,11 +21,19 @@ import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui
 import { CreateNewIssue } from './create-new-issue';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/auth-context';
 
 export function OrgSwitcher() {
    const params = useParams();
    const orgId = params.orgId as string;
+   const { signOut } = useAuth();
+   const router = useRouter();
+
+   const handleLogout = () => {
+      signOut();
+      router.push('/login');
+   };
 
    return (
       <SidebarMenu>
@@ -98,7 +106,7 @@ export function OrgSwitcher() {
                         </DropdownMenuSubContent>
                      </DropdownMenuPortal>
                   </DropdownMenuSub>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleLogout}>
                      Log out
                      <DropdownMenuShortcut>⌥⇧Q</DropdownMenuShortcut>
                   </DropdownMenuItem>

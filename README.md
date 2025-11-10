@@ -96,6 +96,50 @@ pnpm build
 pnpm start  # Serve the production build
 ```
 
+### 🐳 Docker Deployment
+
+Run the application using Docker for easy deployment and consistent environments.
+
+#### Using Docker Compose (Recommended)
+
+```bash
+# Build and start the container
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop the container
+docker-compose down
+```
+
+The app will be available at `http://localhost:3000`
+
+#### Using Docker directly
+
+```bash
+# Build the Docker image
+docker build -t linearapp .
+
+# Run the container
+docker run -p 3000:3000 --name linearapp linearapp
+
+# Run in detached mode
+docker run -d -p 3000:3000 --name linearapp linearapp
+
+# Stop the container
+docker stop linearapp
+docker rm linearapp
+```
+
+#### Docker Environment Variables
+
+If you need to set environment variables, you can do so in `docker-compose.yml` or pass them when running:
+
+```bash
+docker run -p 3000:3000 -e NODE_ENV=production --name linearapp linearapp
+```
+
 ### Run Lint & Format
 
 ```bash
