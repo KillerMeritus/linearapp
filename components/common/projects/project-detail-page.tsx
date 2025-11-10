@@ -662,7 +662,6 @@ export default function ProjectDetailPage() {
                style={{ background: '#0f1011', borderColor: '#23252a' }}
             >
                {activeTab === 'overview' && (
-               <>
                <div className="space-y-6">
                   {/* Properties */}
                   <div>

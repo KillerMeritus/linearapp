@@ -4935,6 +4935,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$layout$2f$side
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$layout$2f$sidebar$2f$create$2d$new$2d$issue$2f$label$2d$selector$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/layout/sidebar/create-new-issue/label-selector.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$data$2f$issues$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/data/issues.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$react$2d$dialog$40$1$2e$1$2e$_244bf796b280e77e0de13fdc9c7bb382$2f$node_modules$2f40$radix$2d$ui$2f$react$2d$dialog$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/@radix-ui+react-dialog@1.1._244bf796b280e77e0de13fdc9c7bb382/node_modules/@radix-ui/react-dialog/dist/index.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$store$2f$projects$2d$store$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/store/projects-store.ts [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 ;
@@ -4959,11 +4960,15 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-function CreateNewIssue() {
+;
+function CreateNewIssue({ projectId } = {}) {
     _s();
     const [createMore, setCreateMore] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const { isOpen, defaultStatus, openModal, closeModal } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$store$2f$create$2d$issue$2d$store$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCreateIssueStore"])();
     const { addIssue, getAllIssues } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$store$2f$issues$2d$store$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIssuesStore"])();
+    const getProjectById = (0, __TURBOPACK__imported__module__$5b$project$5d2f$store$2f$projects$2d$store$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useProjectsStore"])({
+        "CreateNewIssue.useProjectsStore[getProjectById]": (s)=>s.getProjectById
+    }["CreateNewIssue.useProjectsStore[getProjectById]"]);
     const generateUniqueIdentifier = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "CreateNewIssue.useCallback[generateUniqueIdentifier]": ()=>{
             const identifiers = getAllIssues().map({
@@ -4981,6 +4986,7 @@ function CreateNewIssue() {
     const createDefaultData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "CreateNewIssue.useCallback[createDefaultData]": ()=>{
             const identifier = generateUniqueIdentifier();
+            const defaultProject = projectId ? getProjectById(projectId) : undefined;
             return {
                 id: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$uuid$40$11$2e$1$2e$0$2f$node_modules$2f$uuid$2f$dist$2f$esm$2d$browser$2f$v4$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__v4$3e$__["v4"])(),
                 identifier: `LNUI-${identifier}`,
@@ -4996,14 +5002,16 @@ function CreateNewIssue() {
                 labels: [],
                 createdAt: new Date().toISOString(),
                 cycleId: '',
-                project: undefined,
+                project: defaultProject,
                 subissues: [],
                 rank: __TURBOPACK__imported__module__$5b$project$5d2f$data$2f$issues$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ranks"][__TURBOPACK__imported__module__$5b$project$5d2f$data$2f$issues$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ranks"].length - 1]
             };
         }
     }["CreateNewIssue.useCallback[createDefaultData]"], [
         defaultStatus,
-        generateUniqueIdentifier
+        generateUniqueIdentifier,
+        projectId,
+        getProjectById
     ]);
     const [addIssueForm, setAddIssueForm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(createDefaultData());
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
@@ -5011,7 +5019,8 @@ function CreateNewIssue() {
             setAddIssueForm(createDefaultData());
         }
     }["CreateNewIssue.useEffect"], [
-        createDefaultData
+        createDefaultData,
+        isOpen
     ]);
     const createIssue = ()=>{
         if (!addIssueForm.title) {
@@ -5037,17 +5046,17 @@ function CreateNewIssue() {
                     size: "icon",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$remixicon$2b$react$40$4$2e$6$2e$0_react$40$19$2e$0$2e$0$2f$node_modules$2f40$remixicon$2f$react$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RiEditLine"], {}, void 0, false, {
                         fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                        lineNumber: 85,
+                        lineNumber: 92,
                         columnNumber: 16
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                    lineNumber: 84,
+                    lineNumber: 91,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                lineNumber: 83,
+                lineNumber: 90,
                 columnNumber: 10
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogContent"], {
@@ -5066,7 +5075,7 @@ function CreateNewIssue() {
                                             className: "size-4 text-orange-500 fill-orange-500"
                                         }, void 0, false, {
                                             fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                            lineNumber: 93,
+                                            lineNumber: 100,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5074,28 +5083,28 @@ function CreateNewIssue() {
                                             children: "CORE"
                                         }, void 0, false, {
                                             fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                            lineNumber: 94,
+                                            lineNumber: 101,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                    lineNumber: 92,
+                                    lineNumber: 99,
                                     columnNumber: 22
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                lineNumber: 91,
+                                lineNumber: 98,
                                 columnNumber: 19
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                            lineNumber: 90,
+                            lineNumber: 97,
                             columnNumber: 16
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                        lineNumber: 89,
+                        lineNumber: 96,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5111,7 +5120,7 @@ function CreateNewIssue() {
                                     })
                             }, void 0, false, {
                                 fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                lineNumber: 101,
+                                lineNumber: 108,
                                 columnNumber: 16
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$textarea$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"], {
@@ -5124,7 +5133,7 @@ function CreateNewIssue() {
                                     })
                             }, void 0, false, {
                                 fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                lineNumber: 108,
+                                lineNumber: 115,
                                 columnNumber: 16
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5138,7 +5147,7 @@ function CreateNewIssue() {
                                             })
                                     }, void 0, false, {
                                         fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                        lineNumber: 118,
+                                        lineNumber: 125,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$layout$2f$sidebar$2f$create$2d$new$2d$issue$2f$priority$2d$selector$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PrioritySelector"], {
@@ -5149,7 +5158,7 @@ function CreateNewIssue() {
                                             })
                                     }, void 0, false, {
                                         fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                        lineNumber: 124,
+                                        lineNumber: 131,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$layout$2f$sidebar$2f$create$2d$new$2d$issue$2f$assignee$2d$selector$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AssigneeSelector"], {
@@ -5160,7 +5169,7 @@ function CreateNewIssue() {
                                             })
                                     }, void 0, false, {
                                         fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                        lineNumber: 130,
+                                        lineNumber: 137,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$layout$2f$sidebar$2f$create$2d$new$2d$issue$2f$project$2d$selector$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ProjectSelector"], {
@@ -5171,7 +5180,7 @@ function CreateNewIssue() {
                                             })
                                     }, void 0, false, {
                                         fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                        lineNumber: 136,
+                                        lineNumber: 143,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$layout$2f$sidebar$2f$create$2d$new$2d$issue$2f$label$2d$selector$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LabelSelector"], {
@@ -5182,19 +5191,19 @@ function CreateNewIssue() {
                                             })
                                     }, void 0, false, {
                                         fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                        lineNumber: 142,
+                                        lineNumber: 149,
                                         columnNumber: 19
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                lineNumber: 117,
+                                lineNumber: 124,
                                 columnNumber: 16
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                        lineNumber: 100,
+                        lineNumber: 107,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5211,7 +5220,7 @@ function CreateNewIssue() {
                                             onCheckedChange: setCreateMore
                                         }, void 0, false, {
                                             fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                            lineNumber: 153,
+                                            lineNumber: 160,
                                             columnNumber: 22
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
@@ -5219,18 +5228,18 @@ function CreateNewIssue() {
                                             children: "Create more"
                                         }, void 0, false, {
                                             fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                            lineNumber: 158,
+                                            lineNumber: 165,
                                             columnNumber: 22
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                    lineNumber: 152,
+                                    lineNumber: 159,
                                     columnNumber: 19
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                lineNumber: 151,
+                                lineNumber: 158,
                                 columnNumber: 16
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$2$2d$canary$2e$4_react$2d$_c05f8d3cee69fa33aa1cfa0872022df0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -5241,32 +5250,33 @@ function CreateNewIssue() {
                                 children: "Create issue"
                             }, void 0, false, {
                                 fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                                lineNumber: 161,
+                                lineNumber: 168,
                                 columnNumber: 16
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                        lineNumber: 150,
+                        lineNumber: 157,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-                lineNumber: 88,
+                lineNumber: 95,
                 columnNumber: 10
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/layout/sidebar/create-new-issue/index.tsx",
-        lineNumber: 82,
+        lineNumber: 89,
         columnNumber: 7
     }, this);
 }
-_s(CreateNewIssue, "dGKXkTnBv/Iohp6S6edlIdsWo+Y=", false, function() {
+_s(CreateNewIssue, "koGM+QltJKK15gJ0GkDw7Lzi+4Q=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$store$2f$create$2d$issue$2d$store$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCreateIssueStore"],
-        __TURBOPACK__imported__module__$5b$project$5d2f$store$2f$issues$2d$store$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIssuesStore"]
+        __TURBOPACK__imported__module__$5b$project$5d2f$store$2f$issues$2d$store$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIssuesStore"],
+        __TURBOPACK__imported__module__$5b$project$5d2f$store$2f$projects$2d$store$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useProjectsStore"]
     ];
 });
 _c = CreateNewIssue;

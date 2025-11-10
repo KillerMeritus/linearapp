@@ -18,9 +18,18 @@ interface MenuItem {
 function GetMenu({ topic, desc, px = 'px-1' }: MenuItem) {
   return (
     <div className="relative flex flex-col">
-      <a className={clsx(`mt-2 ${px} py-2 rounded-md hover:bg-white/10 transition-colors cursor-pointer`)}>
-        <h2 className="text-sm" style={{ color: '#f7f8f8' }}>{topic}</h2>
-        <p className="text-xs tracking-tight" style={{ color: '#62666a' }}>{desc}</p>
+      <a 
+        className={clsx(`mt-2 ${px} py-2 rounded-md transition-colors cursor-pointer`)}
+        style={{ background: '#141516' }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = '#141516';
+        }}
+      >
+        <h2 className="text-sm font-medium" style={{ color: '#f7f8f8' }}>{topic}</h2>
+        <p className="text-xs tracking-tight mt-0.5" style={{ color: '#62666a' }}>{desc}</p>
       </a>
     </div>
   );
@@ -28,16 +37,25 @@ function GetMenu({ topic, desc, px = 'px-1' }: MenuItem) {
 
 function GetProductMenu() {
   return (
-    <div className="absolute z-[1] w-[32rem] h-auto py-6 mt-2 -translate-x-20 rounded-xl" style={{ background: '#090a0b', border: '1px solid #23252a' }}>
-      <div className="flex absolute top-2 left-2 right-2 bottom-16 rounded-lg" style={{ border: '1px solid #23252a', background: '#161616' }}>
-        <div className="flex flex-col w-56 top-3 px-5 py-4 border-r" style={{ borderColor: '#23252a' }}>
-          <span className="text-xs px-2" style={{ color: '#62666a' }}>Core Features</span>
+    <div 
+      className="absolute z-[100] w-[42rem] h-auto py-6 mt-2 -translate-x-32 rounded-xl backdrop-blur-xl shadow-2xl" 
+      style={{ 
+        background: '#141516', 
+        border: '1px solid #1f2124',
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3)'
+      }}
+    >
+      <div className="flex gap-0 rounded-lg" style={{ background: '#141516' }}>
+        <div className="flex flex-col w-64 px-6 py-5 border-r" style={{ borderColor: '#1f2124', background: '#141516' }}>
+          <span className="text-xs px-2 mb-3" style={{ color: '#62666a' }}>Core Features</span>
           <GetMenu topic="Plan" desc="Set the product direction with projects and initiatives" />
           <GetMenu topic="Build" desc="Make progress with issue tracking and cycle planning" />
+          <GetMenu topic="Track" desc="Monitor progress with cycles and roadmaps" />
+          <GetMenu topic="Automate" desc="Streamline workflows with automation" />
         </div>
-        <div className="flex flex-col grow top-3 px-5 py-4">
-          <span className="text-xs px-2" style={{ color: '#62666a' }}>More</span>
-          <div className="grid grid-flow-col grid-rows-3 gap-1">
+        <div className="flex flex-col flex-1 px-6 py-5 border-r" style={{ borderColor: '#1f2124', background: '#141516' }}>
+          <span className="text-xs px-2 mb-3" style={{ color: '#62666a' }}>Productivity</span>
+          <div className="grid grid-cols-2 gap-2">
             <GetMenu topic="Customer requests" desc="Manage user feedback" px="px-2" />
             <GetMenu topic="Insights" desc="Realtime analytics" px="px-2" />
             <GetMenu topic="Linear Asks" desc="Workplace requests" px="px-2" />
@@ -46,8 +64,15 @@ function GetProductMenu() {
             <GetMenu topic="Linear for Agents" desc="Collaborate with AI teammates" px="px-2" />
           </div>
         </div>
+        <div className="flex flex-col w-64 px-6 py-5" style={{ background: '#141516' }}>
+          <span className="text-xs px-2 mb-3" style={{ color: '#62666a' }}>Enterprise</span>
+          <GetMenu topic="SSO & Security" desc="Enterprise-grade security" />
+          <GetMenu topic="Admin Controls" desc="Advanced team management" />
+          <GetMenu topic="API Access" desc="Build custom integrations" />
+          <GetMenu topic="Support" desc="Priority support and training" />
+        </div>
       </div>
-      <div className="flex grow mt-24 px-6 py-1 justify-between">
+      <div className="flex items-center justify-between mt-6 px-6 pt-4 border-t" style={{ borderColor: '#1f2124', background: '#141516' }}>
         <a className={clsx(`${textBtn()} !text-[#f7f8f8]`)}>New: Agent Interaction Guidelines and SDK</a>
         <button className={clsx(`${textBtn()} !text-[#828fff]`)}>Changelog</button>
       </div>
@@ -57,23 +82,39 @@ function GetProductMenu() {
 
 function GetResourceMenu() {
   return (
-    <div className="absolute z-[1] w-[32rem] h-auto py-6 mt-2 -translate-x-20 rounded-xl" style={{ background: '#090a0b', border: '1px solid #23252a' }}>
-      <div className="flex absolute top-2 left-2 right-2 bottom-2 rounded-lg" style={{ border: '1px solid #23252a', background: '#161616' }}>
-        <div className="flex flex-col w-56 top-3 px-5 py-4 border-r" style={{ borderColor: '#23252a' }}>
-          <span className="text-xs px-2" style={{ color: '#62666a' }}>Company</span>
+    <div 
+      className="absolute z-[100] w-[42rem] h-auto py-6 mt-2 -translate-x-32 rounded-xl backdrop-blur-xl shadow-2xl" 
+      style={{ 
+        background: '#141516', 
+        border: '1px solid #1f2124',
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3)'
+      }}
+    >
+      <div className="flex gap-0 rounded-lg" style={{ background: '#141516' }}>
+        <div className="flex flex-col w-64 px-6 py-5 border-r" style={{ borderColor: '#1f2124', background: '#141516' }}>
+          <span className="text-xs px-2 mb-3" style={{ color: '#62666a' }}>Company</span>
           <GetMenu topic="About" desc="Meet the team" />
           <GetMenu topic="Careers" desc="We're hiring" />
+          <GetMenu topic="Blog" desc="Latest updates and insights" />
+          <GetMenu topic="Press Kit" desc="Media resources" />
         </div>
-        <div className="flex flex-col grow top-3 px-5 py-4">
-          <span className="text-xs px-2" style={{ color: '#62666a' }}>Explore</span>
-          <div className="grid grid-flow-col grid-rows-3 gap-1">
-            <GetMenu topic="Developers" desc="Build on the Linear API" px="px-2" />
+        <div className="flex flex-col flex-1 px-6 py-5 border-r" style={{ borderColor: '#1f2124', background: '#141516' }}>
+          <span className="text-xs px-2 mb-3" style={{ color: '#62666a' }}>Developers</span>
+          <div className="grid grid-cols-2 gap-2">
+            <GetMenu topic="API Docs" desc="Build on the Linear API" px="px-2" />
             <GetMenu topic="Security" desc="Safe, secure, and private" px="px-2" />
-            <GetMenu topic="Docs" desc="How to use Linear" px="px-2" />
+            <GetMenu topic="Documentation" desc="How to use Linear" px="px-2" />
             <GetMenu topic="Switch to Linear" desc="Migration guide" px="px-2" />
             <GetMenu topic="Download" desc="Get the app" px="px-2" />
             <GetMenu topic="Quality" desc="Conversation on quality" px="px-2" />
           </div>
+        </div>
+        <div className="flex flex-col w-64 px-6 py-5" style={{ background: '#141516' }}>
+          <span className="text-xs px-2 mb-3" style={{ color: '#62666a' }}>Resources</span>
+          <GetMenu topic="Help Center" desc="Get support and answers" />
+          <GetMenu topic="Community" desc="Join the discussion" />
+          <GetMenu topic="Templates" desc="Get started quickly" />
+          <GetMenu topic="Webinars" desc="Learn from experts" />
         </div>
       </div>
     </div>
@@ -125,16 +166,16 @@ export function LandingNav() {
           <div className="hidden lg:flex top-[calc(100%+10px)] items-center gap-2 text-base font-sm" style={{ color: '#8a8f98' }}>
             <NavItem label="Product" />
             <NavItem label="Resources" />
-            <Link href="#" className={textBtn()}>
+            <Link href="/pricing" className={textBtn()}>
               Pricing
             </Link>
-            <Link href="#" className={textBtn()}>
+            <Link href="/customers" className={textBtn()}>
               Customers
             </Link>
-            <Link href="#" className={textBtn()}>
+            <Link href="/now" className={textBtn()}>
               Now
             </Link>
-            <Link href="#" className={textBtn()}>
+            <Link href="/contact" className={textBtn()}>
               Contact
             </Link>
           </div>
